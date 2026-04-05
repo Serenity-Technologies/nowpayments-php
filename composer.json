@@ -1,5 +1,5 @@
 {
-    "name": "serenity_technologies/now-payments",
+    "name": "serenity_technologies/nowpayments",
     "description": "Laravel package for NOWPayments cryptocurrency payment processing API",
     "type": "library",
     "license": "MIT",
