@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Minimum withdrawal amount response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class MinWithdrawalAmountResponse extends BaseResponseDto
 {

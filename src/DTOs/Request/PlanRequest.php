@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for creating subscription plans.
  *
  * @see https://api.nowpayments.io/v1/subscriptions/plan
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PlanRequest extends BaseRequestDto
 {

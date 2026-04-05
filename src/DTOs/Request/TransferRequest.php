@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for transferring funds between accounts.
  *
  * @see https://api.nowpayments.io/v1/transfer
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class TransferRequest extends BaseRequestDto
 {

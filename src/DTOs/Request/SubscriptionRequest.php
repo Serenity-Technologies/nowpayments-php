@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for creating subscriptions.
  *
  * @see https://api.nowpayments.io/v1/subscriptions
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class SubscriptionRequest extends BaseRequestDto
 {

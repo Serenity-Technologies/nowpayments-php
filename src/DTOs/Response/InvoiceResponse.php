@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Invoice response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class InvoiceResponse extends BaseResponseDto
 {

@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\Support;
 
 /**
  * Conversion status enum for NOWPayments.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 enum ConversionStatus: string
 {

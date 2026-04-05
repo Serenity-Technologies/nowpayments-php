@@ -13,6 +13,7 @@ use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
 /**
  * Endpoint for subscription-related operations.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class SubscriptionEndpoint
 {

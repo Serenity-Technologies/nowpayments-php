@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
+ */
 namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 abstract class BaseResponseDto

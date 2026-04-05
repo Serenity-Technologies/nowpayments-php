@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Subscription list response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class SubscriptionListResponse extends BaseResponseDto
 {

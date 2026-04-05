@@ -16,6 +16,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\FiatPayoutListResponse;
 
 /**
  * Endpoint for fiat payout-related operations.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FiatPayoutEndpoint
 {

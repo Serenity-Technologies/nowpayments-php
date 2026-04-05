@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for fiat payout operations.
  *
  * @see https://api.nowpayments.io/v1/fiat/payout
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FiatPayoutRequest extends BaseRequestDto
 {

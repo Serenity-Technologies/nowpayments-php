@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for creating an invoice.
  *
  * @see https://api.nowpayments.io/v1/invoice
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class InvoiceRequest extends BaseRequestDto
 {

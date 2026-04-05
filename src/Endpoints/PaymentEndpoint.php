@@ -17,6 +17,7 @@ use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
  * Endpoint for payment-related operations.
  *
  * @see https://documenter.getpostman.com/view/7549238/SVfJ6R1w
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PaymentEndpoint
 {

@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for creating payouts.
  *
  * @see https://api.nowpayments.io/v1/payout
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PayoutRequest extends BaseRequestDto
 {

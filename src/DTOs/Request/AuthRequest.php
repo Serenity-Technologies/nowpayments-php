@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for authentication.
  *
  * Used for obtaining API tokens via email and password.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class AuthRequest extends BaseRequestDto
 {

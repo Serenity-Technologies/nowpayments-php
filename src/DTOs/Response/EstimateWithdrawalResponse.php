@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Estimate withdrawal response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class EstimateWithdrawalResponse extends BaseResponseDto
 {

@@ -1,5 +1,8 @@
 <?php declare(strict_types=1);
 
+/**
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
+ */
 namespace SerenityTechnologies\NowPayments\Events;
 
 class PaymentStatusChanged extends NowPaymentsEvent

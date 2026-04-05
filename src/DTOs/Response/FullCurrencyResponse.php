@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Full currency response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FullCurrencyResponse extends BaseResponseDto
 {

@@ -18,6 +18,7 @@ use SerenityTechnologies\NowPayments\Handlers\IpnHandler;
  *     use HandlesIpnWebhooks;
  * }
  * ```
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 trait HandlesIpnWebhooks
 {

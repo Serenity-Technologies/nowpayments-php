@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Fiat payout list response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FiatPayoutListResponse extends BaseResponseDto
 {

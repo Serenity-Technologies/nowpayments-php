@@ -11,6 +11,7 @@ use JsonSerializable;
  *
  * Provides common functionality for serialization and validation
  * of request data sent to the NOWPayments API.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 abstract class BaseRequestDto implements JsonSerializable
 {

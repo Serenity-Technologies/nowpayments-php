@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Fiat crypto currency response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FiatCryptoCurrencyResponse extends BaseResponseDto
 {

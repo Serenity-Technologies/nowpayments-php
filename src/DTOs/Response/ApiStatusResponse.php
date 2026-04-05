@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * API Status response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class ApiStatusResponse extends BaseResponseDto
 {

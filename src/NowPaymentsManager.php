@@ -78,6 +78,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\{
  *
  * This class provides a convenient facade-friendly interface to all 9 endpoint
  * classes, allowing static access like NowPayments::createPayment().
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class NowPaymentsManager
 {

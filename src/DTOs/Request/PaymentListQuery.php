@@ -6,6 +6,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Query DTO for listing payments with pagination and filtering.
  *
  * @see https://api.nowpayments.io/v1/payment/
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PaymentListQuery extends BaseRequestDto
 {

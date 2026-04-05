@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for creating fiat accounts.
  *
  * @see https://api.nowpayments.io/v1/fiat/account
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FiatAccountRequest extends BaseRequestDto
 {

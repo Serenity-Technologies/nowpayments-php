@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Plan response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PlanResponse extends BaseResponseDto
 {

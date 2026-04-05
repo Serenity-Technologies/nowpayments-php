@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for currency conversion estimates.
  *
  * @see https://api.nowpayments.io/v1/estimate
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class ConversionRequest extends BaseRequestDto
 {

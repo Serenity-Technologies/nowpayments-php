@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for sub-partner payment operations.
  *
  * @see https://api.nowpayments.io/v1/sub-partner-payment
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class SubPartnerPaymentRequest extends BaseRequestDto
 {

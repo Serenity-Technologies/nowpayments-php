@@ -6,6 +6,7 @@ namespace SerenityTechnologies\NowPayments\Support;
  * Payment status enum for NOWPayments.
  *
  * @see https://nowpayments.io/
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 enum PaymentStatus: string
 {

@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Conversion list response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class ConversionListResponse extends BaseResponseDto
 {

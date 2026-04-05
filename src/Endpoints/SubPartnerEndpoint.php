@@ -17,6 +17,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\PaymentListResponse;
 
 /**
  * Endpoint for sub-partner-related operations.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class SubPartnerEndpoint
 {

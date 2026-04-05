@@ -12,6 +12,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\PaymentResponse;
  * Endpoint for invoice-related operations.
  *
  * @see https://documenter.getpostman.com/view/7549238/SVfJ6R1w
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class InvoiceEndpoint
 {

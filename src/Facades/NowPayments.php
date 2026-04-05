@@ -64,6 +64,7 @@ use SerenityTechnologies\NowPayments\NowPaymentsManager;
  * @method static \SerenityTechnologies\NowPayments\Client\NowPaymentsClient client()
  *
  * @see \SerenityTechnologies\NowPayments\NowPaymentsManager
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class NowPayments extends Facade
 {

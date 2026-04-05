@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 
 /**
  * Fiat payment method response DTO.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class FiatPaymentMethodResponse extends BaseResponseDto
 {

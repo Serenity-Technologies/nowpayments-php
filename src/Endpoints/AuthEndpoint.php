@@ -1,5 +1,8 @@
 <?php declare(strict_types=1);
 
+/**
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
+ */
 namespace SerenityTechnologies\NowPayments\Endpoints;
 
 use SerenityTechnologies\NowPayments\DTOs\Request\AuthRequest;

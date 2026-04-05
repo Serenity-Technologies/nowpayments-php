@@ -9,6 +9,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\ConversionListResponse;
 
 /**
  * Endpoint for conversion-related operations.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class ConversionEndpoint
 {

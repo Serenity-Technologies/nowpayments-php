@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for validating payout addresses.
  *
  * @see https://api.nowpayments.io/v1/payout/address/validate
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PayoutAddressRequest extends BaseRequestDto
 {

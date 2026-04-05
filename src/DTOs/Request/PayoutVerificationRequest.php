@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for verifying payout operations.
  *
  * Used to confirm or verify a payout using a verification code.
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class PayoutVerificationRequest extends BaseRequestDto
 {

@@ -6,6 +6,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for estimating cryptocurrency conversion.
  *
  * @see https://api.nowpayments.io/v1/estimate
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class EstimateRequest extends BaseRequestDto
 {

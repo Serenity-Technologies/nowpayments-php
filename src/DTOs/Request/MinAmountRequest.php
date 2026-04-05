@@ -6,6 +6,7 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
  * Request DTO for getting minimum payment amount.
  *
  * @see https://api.nowpayments.io/v1/min-amount
+ * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
 class MinAmountRequest extends BaseRequestDto
 {
