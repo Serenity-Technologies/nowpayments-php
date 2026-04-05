@@ -18,7 +18,7 @@ A comprehensive Laravel package for integrating with the NOWPayments cryptocurre
 ### 1. Require the package via Composer
 
 ```bash
-composer require serenity_technologies/now-payments
+composer require serenity_technologies/nowpayments
 ```
 
 ### 2. Publish the configuration file
