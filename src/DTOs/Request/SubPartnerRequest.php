@@ -16,7 +16,7 @@ class SubPartnerRequest extends BaseRequestDto
      * @param string $name Name of the sub-partner.
      */
     public function __construct(
-        private readonly string $name,
+        public readonly string $name,
     ) {
     }
 

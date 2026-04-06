@@ -39,9 +39,9 @@ $status = NowPayments::getPaymentStatus($paymentId);
 **Pattern B: Dependency Injection (testable, explicit)**
 ```php
 public function __construct(
-    private PaymentEndpoint $payments,
-    private PayoutEndpoint $payouts,
-    private IpnHandler $ipnHandler,
+    public PaymentEndpoint $payments,
+    public PayoutEndpoint $payouts,
+    public IpnHandler $ipnHandler,
 ) {}
 
 $payment = $this->payments->createPayment($request);

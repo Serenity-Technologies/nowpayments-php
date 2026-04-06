@@ -19,10 +19,10 @@ class FiatPayoutRequest extends BaseRequestDto
      * @param string $provider Payment provider name.
      */
     public function __construct(
-        private readonly string $fiatCurrency,
-        private readonly string $cryptoCurrency,
-        private readonly float $amount,
-        private readonly string $provider,
+        public readonly string $fiatCurrency,
+        public readonly string $cryptoCurrency,
+        public readonly float $amount,
+        public readonly string $provider,
     ) {
     }
 

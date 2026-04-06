@@ -18,9 +18,9 @@ class SubPartnerDepositRequest extends BaseRequestDto
      * @param int $subPartnerId ID of the sub-partner.
      */
     public function __construct(
-        private readonly string $currency,
-        private readonly float $amount,
-        private readonly int $subPartnerId,
+        public readonly string $currency,
+        public readonly float $amount,
+        public readonly int $subPartnerId,
     ) {
     }
 

@@ -15,8 +15,8 @@ class MinAmountRequest extends BaseRequestDto
      * @param string $currencyTo Target currency (e.g., "usdttrx")
      */
     public function __construct(
-        private readonly string $currencyFrom,
-        private readonly string $currencyTo,
+        public readonly string $currencyFrom,
+        public readonly string $currencyTo,
     ) {
     }
 

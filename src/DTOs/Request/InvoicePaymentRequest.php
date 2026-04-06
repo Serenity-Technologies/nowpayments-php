@@ -23,14 +23,14 @@ class InvoicePaymentRequest extends BaseRequestDto
      * @param string|null $payoutCurrency Currency for the payout.
      */
     public function __construct(
-        private readonly int $iid,
-        private readonly string $payCurrency,
-        private readonly ?string $purchaseId = null,
-        private readonly ?string $orderDescription = null,
-        private readonly ?string $customerEmail = null,
-        private readonly ?string $payoutAddress = null,
-        private readonly ?string $payoutExtraId = null,
-        private readonly ?string $payoutCurrency = null,
+        public readonly int $iid,
+        public readonly string $payCurrency,
+        public readonly ?string $purchaseId = null,
+        public readonly ?string $orderDescription = null,
+        public readonly ?string $customerEmail = null,
+        public readonly ?string $payoutAddress = null,
+        public readonly ?string $payoutExtraId = null,
+        public readonly ?string $payoutCurrency = null,
     ) {
     }
 

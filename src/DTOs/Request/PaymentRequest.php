@@ -27,18 +27,18 @@ class PaymentRequest extends BaseRequestDto
      * @param bool|null $isFeePaidByUser Whether the network fee is paid by the user.
      */
     public function __construct(
-        private readonly float $priceAmount,
-        private readonly string $priceCurrency,
-        private readonly string $payCurrency,
-        private readonly ?float $payAmount = null,
-        private readonly ?string $ipnCallbackUrl = null,
-        private readonly ?string $orderId = null,
-        private readonly ?string $orderDescription = null,
-        private readonly ?string $payoutAddress = null,
-        private readonly ?string $payoutCurrency = null,
-        private readonly ?string $payoutExtraId = null,
-        private readonly ?bool $isFixedRate = null,
-        private readonly ?bool $isFeePaidByUser = null,
+        public readonly float $priceAmount,
+        public readonly string $priceCurrency,
+        public readonly string $payCurrency,
+        public readonly ?float $payAmount = null,
+        public readonly ?string $ipnCallbackUrl = null,
+        public readonly ?string $orderId = null,
+        public readonly ?string $orderDescription = null,
+        public readonly ?string $payoutAddress = null,
+        public readonly ?string $payoutCurrency = null,
+        public readonly ?string $payoutExtraId = null,
+        public readonly ?bool $isFixedRate = null,
+        public readonly ?bool $isFeePaidByUser = null,
     ) {
     }
 

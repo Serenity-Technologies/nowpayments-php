@@ -19,10 +19,10 @@ class TransferRequest extends BaseRequestDto
      * @param int|null $toId Destination account ID.
      */
     public function __construct(
-        private readonly string $currency,
-        private readonly float $amount,
-        private readonly ?int $fromId = null,
-        private readonly ?int $toId = null,
+        public readonly string $currency,
+        public readonly float $amount,
+        public readonly ?int $fromId = null,
+        public readonly ?int $toId = null,
     ) {
     }
 

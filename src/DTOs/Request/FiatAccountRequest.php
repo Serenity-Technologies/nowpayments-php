@@ -20,11 +20,11 @@ class FiatAccountRequest extends BaseRequestDto
      * @param string|null $countryCode ISO country code.
      */
     public function __construct(
-        private readonly string $currency,
-        private readonly string $paymentCode,
-        private readonly array $fields = [],
-        private readonly ?string $provider = null,
-        private readonly ?string $countryCode = null,
+        public readonly string $currency,
+        public readonly string $paymentCode,
+        public readonly array $fields = [],
+        public readonly ?string $provider = null,
+        public readonly ?string $countryCode = null,
     ) {
     }
 

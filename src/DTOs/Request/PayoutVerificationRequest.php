@@ -16,7 +16,7 @@ class PayoutVerificationRequest extends BaseRequestDto
      * @param string $verificationCode The verification code received for the payout.
      */
     public function __construct(
-        private readonly string $verificationCode,
+        public readonly string $verificationCode,
     ) {
     }
 

@@ -23,16 +23,16 @@ class PaymentListQuery extends BaseRequestDto
      * @param string|null $orderId Filter by order ID
      */
     public function __construct(
-        private readonly ?int $limit = null,
-        private readonly ?int $page = null,
-        private readonly ?string $sortBy = null,
-        private readonly ?string $orderBy = null,
-        private readonly ?string $dateFrom = null,
-        private readonly ?string $dateTo = null,
-        private readonly ?string $paymentStatus = null,
-        private readonly ?string $payCurrency = null,
-        private readonly ?string $priceCurrency = null,
-        private readonly ?string $orderId = null,
+        public readonly ?int $limit = null,
+        public readonly ?int $page = null,
+        public readonly ?string $sortBy = null,
+        public readonly ?string $orderBy = null,
+        public readonly ?string $dateFrom = null,
+        public readonly ?string $dateTo = null,
+        public readonly ?string $paymentStatus = null,
+        public readonly ?string $payCurrency = null,
+        public readonly ?string $priceCurrency = null,
+        public readonly ?string $orderId = null,
     ) {
     }
 

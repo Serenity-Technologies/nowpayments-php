@@ -20,11 +20,11 @@ class PayoutRequest extends BaseRequestDto
      * @param array<int, PayoutWithdrawalItem> $withdrawals Array of withdrawal items.
      */
     public function __construct(
-        private readonly array $withdrawals,
-        private readonly ?string $executeAt = null,
-        private readonly ?string $interval = null,
-        private readonly ?string $payoutDescription = null,
-        private readonly ?string $ipnCallbackUrl = null,
+        public readonly array $withdrawals,
+        public readonly ?string $executeAt = null,
+        public readonly ?string $interval = null,
+        public readonly ?string $payoutDescription = null,
+        public readonly ?string $ipnCallbackUrl = null,
     ) {
     }
 
@@ -121,15 +121,15 @@ class PayoutWithdrawalItem extends BaseRequestDto
      * @param string|null $payoutDescription Description for this specific withdrawal.
      */
     public function __construct(
-        private readonly string $address,
-        private readonly string $currency,
-        private readonly float $amount,
-        private readonly ?string $extraId = null,
-        private readonly ?string $ipnCallbackUrl = null,
-        private readonly ?float $fiatAmount = null,
-        private readonly ?string $fiatCurrency = null,
-        private readonly ?string $uniqueExternalId = null,
-        private readonly ?string $payoutDescription = null,
+        public readonly string $address,
+        public readonly string $currency,
+        public readonly float $amount,
+        public readonly ?string $extraId = null,
+        public readonly ?string $ipnCallbackUrl = null,
+        public readonly ?float $fiatAmount = null,
+        public readonly ?string $fiatCurrency = null,
+        public readonly ?string $uniqueExternalId = null,
+        public readonly ?string $payoutDescription = null,
     ) {
     }
 

@@ -18,9 +18,9 @@ class PayoutAddressRequest extends BaseRequestDto
      * @param string|null $extraId Extra ID (memo/destination tag) if required by the currency.
      */
     public function __construct(
-        private readonly string $address,
-        private readonly string $currency,
-        private readonly ?string $extraId = null,
+        public readonly string $address,
+        public readonly string $currency,
+        public readonly ?string $extraId = null,
     ) {
     }
 

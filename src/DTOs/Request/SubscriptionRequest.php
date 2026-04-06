@@ -18,9 +18,9 @@ class SubscriptionRequest extends BaseRequestDto
      * @param string|null $email Email address of the subscriber.
      */
     public function __construct(
-        private readonly int $subscriptionPlanId,
-        private readonly ?int $subPartnerId = null,
-        private readonly ?string $email = null,
+        public readonly int $subscriptionPlanId,
+        public readonly ?int $subPartnerId = null,
+        public readonly ?string $email = null,
     ) {
     }
 

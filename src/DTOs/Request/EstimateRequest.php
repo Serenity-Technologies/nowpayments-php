@@ -18,11 +18,11 @@ class EstimateRequest extends BaseRequestDto
      * @param bool|null $isFeePaidByUser Whether network fee is paid by user
      */
     public function __construct(
-        private readonly string $currencyFrom,
-        private readonly string $currencyTo,
-        private readonly float $amount,
-        private readonly ?bool $isFixedRate = null,
-        private readonly ?bool $isFeePaidByUser = null,
+        public readonly string $currencyFrom,
+        public readonly string $currencyTo,
+        public readonly float $amount,
+        public readonly ?bool $isFixedRate = null,
+        public readonly ?bool $isFeePaidByUser = null,
     ) {
     }
 

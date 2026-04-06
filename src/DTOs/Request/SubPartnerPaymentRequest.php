@@ -21,12 +21,12 @@ class SubPartnerPaymentRequest extends BaseRequestDto
      * @param string|null $ipnCallbackUrl URL for Instant Payment Notification.
      */
     public function __construct(
-        private readonly string $currency,
-        private readonly float $amount,
-        private readonly int $subPartnerId,
-        private readonly ?bool $isFixedRate = null,
-        private readonly ?bool $isFeePaidByUser = null,
-        private readonly ?string $ipnCallbackUrl = null,
+        public readonly string $currency,
+        public readonly float $amount,
+        public readonly int $subPartnerId,
+        public readonly ?bool $isFixedRate = null,
+        public readonly ?bool $isFeePaidByUser = null,
+        public readonly ?string $ipnCallbackUrl = null,
     ) {
     }
 

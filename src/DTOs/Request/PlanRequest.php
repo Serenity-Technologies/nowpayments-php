@@ -23,14 +23,14 @@ class PlanRequest extends BaseRequestDto
      * @param string|null $partiallyPaidUrl URL to redirect when a partial payment is made.
      */
     public function __construct(
-        private readonly string $title,
-        private readonly int $intervalDay,
-        private readonly float $amount,
-        private readonly string $currency,
-        private readonly ?string $ipnCallbackUrl = null,
-        private readonly ?string $successUrl = null,
-        private readonly ?string $cancelUrl = null,
-        private readonly ?string $partiallyPaidUrl = null,
+        public readonly string $title,
+        public readonly int $intervalDay,
+        public readonly float $amount,
+        public readonly string $currency,
+        public readonly ?string $ipnCallbackUrl = null,
+        public readonly ?string $successUrl = null,
+        public readonly ?string $cancelUrl = null,
+        public readonly ?string $partiallyPaidUrl = null,
     ) {
     }
 

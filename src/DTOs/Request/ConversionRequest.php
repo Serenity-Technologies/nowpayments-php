@@ -18,9 +18,9 @@ class ConversionRequest extends BaseRequestDto
      * @param string $toCurrency Target currency code.
      */
     public function __construct(
-        private readonly float $amount,
-        private readonly string $fromCurrency,
-        private readonly string $toCurrency,
+        public readonly float $amount,
+        public readonly string $fromCurrency,
+        public readonly string $toCurrency,
     ) {
     }
 

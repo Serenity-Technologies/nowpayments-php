@@ -17,8 +17,8 @@ class AuthRequest extends BaseRequestDto
      * @param string $password User password.
      */
     public function __construct(
-        private readonly string $email,
-        private readonly string $password,
+        public readonly string $email,
+        public readonly string $password,
     ) {
     }
 
