@@ -12,6 +12,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\MinAmountResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\PaymentListResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\PaymentResponse;
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
+use SerenityTechnologies\NowPayments\QueryBuilders\PaymentListQueryBuilder;
 
 /**
  * Endpoint for payment-related operations.
@@ -60,15 +61,23 @@ class PaymentEndpoint
     /**
      * Get a list of payments with pagination and filtering.
      *
-     * @param PaymentListQuery $query
+     * @param PaymentListQuery|PaymentListQueryBuilder|array $query
      * @return PaymentListResponse
      *
      * @see https://api.nowpayments.io/v1/payment/
      */
-    public function getListPayments(PaymentListQuery $query): PaymentListResponse
+    public function getListPayments(PaymentListQuery|PaymentListQueryBuilder|array $query): PaymentListResponse
     {
-        $query->validate();
-        $response = $this->client->get('/v1/payment/', $query->toArray(), requiresAuth: false);
+        if ($query instanceof PaymentListQueryBuilder) {
+            $queryArray = $query->build();
+        } elseif ($query instanceof PaymentListQuery) {
+            $query->validate();
+            $queryArray = $query->toArray();
+        } else {
+            $queryArray = $query;
+        }
+
+        $response = $this->client->get('/v1/payment/', $queryArray, requiresAuth: false);
 
         return PaymentListResponse::fromArray($response);
     }

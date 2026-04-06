@@ -192,7 +192,9 @@ $fiatPayoutEndpoint->listFiatPayouts($filters);
 
 ### Query Builders
 
-For list endpoints, use query builders for fluent pagination and filtering:
+For list endpoints, use query builders for fluent pagination and filtering. You have three options:
+
+#### Option 1: Using Query Builders (Recommended for complex queries)
 
 ```php
 use SerenityTechnologies\NowPayments\QueryBuilders\PaymentListQueryBuilder;
@@ -203,10 +205,96 @@ $queryBuilder->setLimit(50)
     ->setSortBy('created_at')
     ->setOrderBy('desc')
     ->setDateFrom('2024-01-01')
+    ->setDateTo('2024-12-31')
+    ->setPaymentStatus('finished')
+    ->setPayCurrency('btc')
+    ->setPriceCurrency('usd')
+    ->setOrderId('ORDER-123');
+
+// Pass the builder directly to the endpoint
+$payments = $paymentEndpoint->getListPayments($queryBuilder);
+```
+
+#### Option 2: Using DTOs (Recommended for simple queries)
+
+```php
+use SerenityTechnologies\NowPayments\DTOs\Request\PaymentListQuery;
+
+$query = new PaymentListQuery(
+    limit: 50,
+    page: 0,
+    sortBy: 'created_at',
+    orderBy: 'desc',
+    dateFrom: '2024-01-01',
+    dateTo: '2024-12-31',
+    paymentStatus: 'finished',
+    payCurrency: 'btc',
+    priceCurrency: 'usd',
+    orderId: 'ORDER-123'
+);
+
+$payments = $paymentEndpoint->getListPayments($query);
+```
+
+#### Option 3: Using Arrays (For backward compatibility)
+
+```php
+$query = [
+    'limit' => 50,
+    'page' => 0,
+    'sort' => 'created_at',
+    'order' => 'desc',
+    'date_from' => '2024-01-01',
+    'date_to' => '2024-12-31',
+    'payment_status' => 'finished',
+];
+
+$payments = $paymentEndpoint->getListPayments($query);
+```
+
+#### Payout List Query Builder
+
+```php
+use SerenityTechnologies\NowPayments\QueryBuilders\PayoutListQueryBuilder;
+
+$payoutBuilder = new PayoutListQueryBuilder();
+$payoutBuilder->setLimit(20)
+    ->setPage(0)
+    ->setStatus('finished')
+    ->setOrderBy('created_at')
+    ->setOrder('desc')
+    ->setDateFrom('2024-01-01')
     ->setDateTo('2024-12-31');
 
-$payments = $paymentEndpoint->getListPayments($queryBuilder->build());
+$payouts = $payoutEndpoint->listPayouts($payoutBuilder);
 ```
+
+#### Available Query Builder Methods
+
+**PaymentListQueryBuilder:**
+- `setLimit(int $limit)` - Set limit (1-500)
+- `setPage(int $page)` - Set page number
+- `setSortBy(string $sortBy)` - Set sort field (payment_id, payment_status, created_at, etc.)
+- `setOrderBy(string $orderBy)` - Set sort order (asc or desc)
+- `setDateFrom(string $dateFrom)` - Set start date (YYYY-MM-DD or ISO 8601)
+- `setDateTo(string $dateTo)` - Set end date (YYYY-MM-DD or ISO 8601)
+- `setInvoiceId(int $invoiceId)` - Filter by invoice ID
+- `setPaymentStatus(string $status)` - Filter by payment status
+- `setPayCurrency(string $currency)` - Filter by payment currency
+- `setPriceCurrency(string $currency)` - Filter by price currency
+- `setOrderId(string $orderId)` - Filter by order ID
+- `reset()` - Reset all filters
+
+**PayoutListQueryBuilder:**
+- `setLimit(int $limit)` - Set limit (default: 20)
+- `setPage(int $page)` - Set page number (default: 0)
+- `setBatchId(int $batchId)` - Filter by batch ID
+- `setStatus(string $status)` - Filter by status (creating, waiting, processing, sending, finished, failed, rejected, cancelled)
+- `setOrderBy(string $orderBy)` - Set sort field
+- `setOrder(string $order)` - Set sort direction (asc or desc)
+- `setDateFrom(string $dateFrom)` - Set start date (YYYY-MM-DD or ISO 8601)
+- `setDateTo(string $dateTo)` - Set end date (YYYY-MM-DD or ISO 8601)
+- `reset()` - Reset all filters to defaults
 
 ### Handling IPN Webhooks
 

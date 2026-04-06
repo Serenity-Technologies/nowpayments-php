@@ -14,6 +14,10 @@ class PaymentListQueryBuilder
     protected ?string $dateFrom = null;
     protected ?string $dateTo = null;
     protected ?int $invoiceId = null;
+    protected ?string $paymentStatus = null;
+    protected ?string $payCurrency = null;
+    protected ?string $priceCurrency = null;
+    protected ?string $orderId = null;
 
     /**
      * Set limit (1-500).
@@ -42,13 +46,13 @@ class PaymentListQueryBuilder
             'payment_id', 'payment_status', 'pay_address', 'price_amount',
             'price_currency', 'pay_amount', 'actually_paid', 'pay_currency',
             'order_id', 'order_description', 'purchase_id', 'outcome_amount',
-            'outcome_currency'
+            'outcome_currency', 'created_at', 'updated_at'
         ];
-        
+
         if (in_array($sortBy, $allowedFields, true)) {
             $this->sortBy = $sortBy;
         }
-        
+
         return $this;
     }
 
@@ -60,7 +64,7 @@ class PaymentListQueryBuilder
         if (in_array(strtolower($orderBy), ['asc', 'desc'], true)) {
             $this->orderBy = strtolower($orderBy);
         }
-        
+
         return $this;
     }
 
@@ -88,6 +92,51 @@ class PaymentListQueryBuilder
     public function setInvoiceId(int $invoiceId): self
     {
         $this->invoiceId = $invoiceId;
+        return $this;
+    }
+
+    /**
+     * Set payment status filter.
+     */
+    public function setPaymentStatus(string $paymentStatus): self
+    {
+        $allowedStatuses = [
+            'waiting', 'confirming', 'confirmed', 'sending', 'finished',
+            'failed', 'refunded', 'expired', 'partially_paid', 're_deposited',
+            'wrong_asset'
+        ];
+
+        if (in_array(strtolower($paymentStatus), $allowedStatuses, true)) {
+            $this->paymentStatus = strtolower($paymentStatus);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set payment currency filter.
+     */
+    public function setPayCurrency(string $payCurrency): self
+    {
+        $this->payCurrency = strtolower($payCurrency);
+        return $this;
+    }
+
+    /**
+     * Set price currency filter.
+     */
+    public function setPriceCurrency(string $priceCurrency): self
+    {
+        $this->priceCurrency = strtolower($priceCurrency);
+        return $this;
+    }
+
+    /**
+     * Set order ID filter.
+     */
+    public function setOrderId(string $orderId): self
+    {
+        $this->orderId = $orderId;
         return $this;
     }
 
@@ -126,6 +175,22 @@ class PaymentListQueryBuilder
             $query['invoice_id'] = $this->invoiceId;
         }
 
+        if ($this->paymentStatus !== null) {
+            $query['payment_status'] = $this->paymentStatus;
+        }
+
+        if ($this->payCurrency !== null) {
+            $query['pay_currency'] = $this->payCurrency;
+        }
+
+        if ($this->priceCurrency !== null) {
+            $query['price_currency'] = $this->priceCurrency;
+        }
+
+        if ($this->orderId !== null) {
+            $query['order_id'] = $this->orderId;
+        }
+
         return $query;
     }
 
@@ -141,7 +206,11 @@ class PaymentListQueryBuilder
         $this->dateFrom = null;
         $this->dateTo = null;
         $this->invoiceId = null;
-        
+        $this->paymentStatus = null;
+        $this->payCurrency = null;
+        $this->priceCurrency = null;
+        $this->orderId = null;
+
         return $this;
     }
 }

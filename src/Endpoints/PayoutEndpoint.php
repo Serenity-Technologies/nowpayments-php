@@ -6,6 +6,7 @@
 namespace SerenityTechnologies\NowPayments\Endpoints;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
+use SerenityTechnologies\NowPayments\DTOs\Request\PayoutListQuery;
 use SerenityTechnologies\NowPayments\DTOs\Request\PayoutRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\PayoutAddressRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\PayoutVerificationRequest;
@@ -16,6 +17,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\PayoutListResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\FeeEstimateResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\MinWithdrawalAmountResponse;
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
+use SerenityTechnologies\NowPayments\QueryBuilders\PayoutListQueryBuilder;
 
 class PayoutEndpoint
 {
@@ -72,12 +74,21 @@ class PayoutEndpoint
     /**
      * List payouts with pagination.
      *
-     * @param array $filters
+     * @param PayoutListQuery|PayoutListQueryBuilder|array $filters
      * @return PayoutListResponse
      */
-    public function listPayouts(array $filters = []): PayoutListResponse
+    public function listPayouts(PayoutListQuery|PayoutListQueryBuilder|array $filters = []): PayoutListResponse
     {
-        $response = $this->client->get('/v1/payout', $filters);
+        if ($filters instanceof PayoutListQueryBuilder) {
+            $queryArray = $filters->build();
+        } elseif ($filters instanceof PayoutListQuery) {
+            $filters->validate();
+            $queryArray = $filters->toArray();
+        } else {
+            $queryArray = $filters;
+        }
+
+        $response = $this->client->get('/v1/payout', $queryArray);
         return PayoutListResponse::fromArray($response);
     }
 
