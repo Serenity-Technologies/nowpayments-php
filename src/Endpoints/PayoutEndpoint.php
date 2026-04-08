@@ -153,11 +153,22 @@ class PayoutEndpoint
     /**
      * Get payout fee estimate.
      *
+     * @param string|null $currency Currency to get fee for (e.g., "usdttrc20")
+     * @param float|null $amount Amount to get fee for
      * @return FeeEstimateResponse
+     * @throws NowPaymentsException
      */
-    public function getPayoutFeeEstimate(): FeeEstimateResponse
+    public function getPayoutFeeEstimate(?string $currency = null, ?float $amount = null): FeeEstimateResponse
     {
-        $response = $this->client->get('/v1/payout/fee');
+        $query = [];
+        if ($currency !== null) {
+            $query['currency'] = $currency;
+        }
+        if ($amount !== null) {
+            $query['amount'] = $amount;
+        }
+
+        $response = $this->client->get('/v1/payout/fee', $query);
         return FeeEstimateResponse::fromArray($response);
     }
 }

@@ -156,23 +156,23 @@ class PaymentListQueryBuilder
         }
 
         if ($this->sortBy !== null) {
-            $query['sort'] = $this->sortBy;
+            $query['sortBy'] = $this->sortBy;
         }
 
         if ($this->orderBy !== null) {
-            $query['order'] = $this->orderBy;
+            $query['orderBy'] = $this->orderBy;
         }
 
         if ($this->dateFrom !== null) {
-            $query['date_from'] = $this->dateFrom;
+            $query['dateFrom'] = $this->dateFrom;
         }
 
         if ($this->dateTo !== null) {
-            $query['date_to'] = $this->dateTo;
+            $query['dateTo'] = $this->dateTo;
         }
 
         if ($this->invoiceId !== null) {
-            $query['invoice_id'] = $this->invoiceId;
+            $query['invoiceId'] = $this->invoiceId;
         }
 
         if ($this->paymentStatus !== null) {

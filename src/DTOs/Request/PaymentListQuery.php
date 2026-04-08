@@ -17,6 +17,7 @@ class PaymentListQuery extends BaseRequestDto
      * @param string|null $orderBy Sort order: "asc" or "desc"
      * @param string|null $dateFrom Filter payments from this date (ISO 8601)
      * @param string|null $dateTo Filter payments to this date (ISO 8601)
+     * @param int|null $invoiceId Filter by invoice ID
      * @param string|null $paymentStatus Filter by payment status
      * @param string|null $payCurrency Filter by payment currency
      * @param string|null $priceCurrency Filter by price currency
@@ -29,6 +30,7 @@ class PaymentListQuery extends BaseRequestDto
         public readonly ?string $orderBy = null,
         public readonly ?string $dateFrom = null,
         public readonly ?string $dateTo = null,
+        public readonly ?int $invoiceId = null,
         public readonly ?string $paymentStatus = null,
         public readonly ?string $payCurrency = null,
         public readonly ?string $priceCurrency = null,
@@ -66,6 +68,11 @@ class PaymentListQuery extends BaseRequestDto
         return $this->dateTo;
     }
 
+    public function getInvoiceId(): ?int
+    {
+        return $this->invoiceId;
+    }
+
     public function getPaymentStatus(): ?string
     {
         return $this->paymentStatus;
@@ -99,19 +106,23 @@ class PaymentListQuery extends BaseRequestDto
         }
 
         if ($this->sortBy !== null) {
-            $array['sort'] = $this->sortBy;
+            $array['sortBy'] = $this->sortBy;
         }
 
         if ($this->orderBy !== null) {
-            $array['order'] = $this->orderBy;
+            $array['orderBy'] = $this->orderBy;
         }
 
         if ($this->dateFrom !== null) {
-            $array['date_from'] = $this->dateFrom;
+            $array['dateFrom'] = $this->dateFrom;
         }
 
         if ($this->dateTo !== null) {
-            $array['date_to'] = $this->dateTo;
+            $array['dateTo'] = $this->dateTo;
+        }
+
+        if ($this->invoiceId !== null) {
+            $array['invoiceId'] = $this->invoiceId;
         }
 
         if ($this->paymentStatus !== null) {

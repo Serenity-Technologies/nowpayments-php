@@ -51,8 +51,8 @@ class QueryBuildersTest extends TestCase
 
         $query = $builder->build();
 
-        $this->assertEquals('created_at', $query['sort']);
-        $this->assertEquals('desc', $query['order']);
+        $this->assertEquals('created_at', $query['sortBy']);
+        $this->assertEquals('desc', $query['orderBy']);
     }
 
     /** @test */
@@ -64,8 +64,8 @@ class QueryBuildersTest extends TestCase
 
         $query = $builder->build();
 
-        $this->assertArrayNotHasKey('sort', $query);
-        $this->assertEquals('asc', $query['order']);
+        $this->assertArrayNotHasKey('sortBy', $query);
+        $this->assertEquals('asc', $query['orderBy']);
     }
 
     /** @test */
@@ -88,8 +88,8 @@ class QueryBuildersTest extends TestCase
 
         $query = $builder->build();
 
-        $this->assertEquals('2024-01-01', $query['date_from']);
-        $this->assertEquals('2024-12-31', $query['date_to']);
+        $this->assertEquals('2024-01-01', $query['dateFrom']);
+        $this->assertEquals('2024-12-31', $query['dateTo']);
     }
 
     /** @test */
@@ -113,11 +113,11 @@ class QueryBuildersTest extends TestCase
         $this->assertEquals([
             'limit' => 100,
             'page' => 2,
-            'sort' => 'payment_status',
-            'order' => 'asc',
-            'date_from' => '2024-01-01',
-            'date_to' => '2024-12-31',
-            'invoice_id' => 12345,
+            'sortBy' => 'payment_status',
+            'orderBy' => 'asc',
+            'dateFrom' => '2024-01-01',
+            'dateTo' => '2024-12-31',
+            'invoiceId' => 12345,
             'payment_status' => 'finished',
             'pay_currency' => 'btc',
             'price_currency' => 'usd',

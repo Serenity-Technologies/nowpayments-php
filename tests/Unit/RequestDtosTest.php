@@ -10,6 +10,7 @@ use SerenityTechnologies\NowPayments\DTOs\Request\InvoiceRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\AuthRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\PayoutRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\ConversionRequest;
+use SerenityTechnologies\NowPayments\DTOs\Request\MinAmountRequest;
 use InvalidArgumentException;
 use SerenityTechnologies\NowPayments\Tests\TestCase;
 
@@ -172,5 +173,40 @@ class RequestDtosTest extends TestCase
 
         $this->assertEquals(100.00, $decoded['price_amount']);
         $this->assertEquals('ORDER-123', $decoded['order_id']);
+    }
+
+    /** @test */
+    public function min_amount_request_includes_optional_parameters(): void
+    {
+        $request = new MinAmountRequest(
+            currencyFrom: 'eth',
+            currencyTo: 'trx',
+            fiatEquivalent: 'usd',
+            isFixedRate: true,
+            isFeePaidByUser: false
+        );
+
+        $array = $request->toArray();
+
+        $this->assertEquals('eth', $array['currency_from']);
+        $this->assertEquals('trx', $array['currency_to']);
+        $this->assertEquals('usd', $array['fiat_equivalent']);
+        $this->assertTrue($array['is_fixed_rate']);
+        $this->assertFalse($array['is_fee_paid_by_user']);
+    }
+
+    /** @test */
+    public function min_amount_request_omits_null_values(): void
+    {
+        $request = new MinAmountRequest(
+            currencyFrom: 'btc',
+            currencyTo: 'usdt'
+        );
+
+        $array = $request->toArray();
+
+        $this->assertArrayNotHasKey('fiat_equivalent', $array);
+        $this->assertArrayNotHasKey('is_fixed_rate', $array);
+        $this->assertArrayNotHasKey('is_fee_paid_by_user', $array);
     }
 }
