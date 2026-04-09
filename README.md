@@ -59,10 +59,10 @@ $status = NowPayments::get('/v1/status');
 ### Using Endpoint Classes (Recommended)
 
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\PaymentEndpoint;
+use SerenityTechnologies\NowPayments\Services\PaymentService;
 use SerenityTechnologies\NowPayments\DTOs\Request\PaymentRequest;
 
-public function createPayment(PaymentEndpoint $paymentEndpoint)
+public function createPayment(PaymentService $paymentEndpoint)
 {
     $request = new PaymentRequest(
         price_amount: 100.00,
@@ -82,21 +82,23 @@ public function createPayment(PaymentEndpoint $paymentEndpoint)
 }
 ```
 
-### Available Endpoints
+### Available Services
 
 All endpoints are auto-resolved via Laravel's dependency injection:
 
 #### Authentication & API Status
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\AuthEndpoint;
+use SerenityTechnologies\NowPayments\Services\AuthService;
 
 $authEndpoint->getStatus(); // Returns ApiStatusResponse
 $authEndpoint->authenticate($authRequest); // Returns AuthResponse
 ```
 
 #### Currencies
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\CurrencyEndpoint;
+use SerenityTechnologies\NowPayments\Services\CurrencyService;
 
 $currencyEndpoint->getAvailableCurrencies();
 $currencyEndpoint->getFullCurrencies();
@@ -104,8 +106,9 @@ $currencyEndpoint->getMerchantCoins();
 ```
 
 #### Payments
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\PaymentEndpoint;
+use SerenityTechnologies\NowPayments\Services\PaymentService;
 
 $paymentEndpoint->createPayment($request);
 $paymentEndpoint->getPaymentStatus($paymentId);
@@ -115,16 +118,18 @@ $paymentEndpoint->getMinAmount($minAmountRequest);
 ```
 
 #### Invoices
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\InvoiceEndpoint;
+use SerenityTechnologies\NowPayments\Services\InvoiceService;
 
 $invoiceEndpoint->createInvoice($invoiceRequest);
 $invoiceEndpoint->createInvoicePayment($invoicePaymentRequest);
 ```
 
 #### Payouts
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\PayoutEndpoint;
+use SerenityTechnologies\NowPayments\Services\PayoutService;
 
 $payoutEndpoint->getBalance();
 $payoutEndpoint->validateAddress($addressRequest);
@@ -138,8 +143,9 @@ $payoutEndpoint->getPayoutFeeEstimate();
 ```
 
 #### Conversions
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\ConversionEndpoint;
+use SerenityTechnologies\NowPayments\Services\ConversionService;
 
 $conversionEndpoint->createConversion($conversionRequest);
 $conversionEndpoint->listConversions($filters);
@@ -147,8 +153,9 @@ $conversionEndpoint->getConversionStatus($conversionId);
 ```
 
 #### Sub-Partners (Customer Management)
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\SubPartnerEndpoint;
+use SerenityTechnologies\NowPayments\Services\SubPartnerService;
 
 $subPartnerEndpoint->createSubPartner($request);
 $subPartnerEndpoint->getSubPartnerBalance($id);
@@ -163,8 +170,9 @@ $subPartnerEndpoint->getSubPartnerPayments($filters);
 ```
 
 #### Subscriptions (Recurring Payments)
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\SubscriptionEndpoint;
+use SerenityTechnologies\NowPayments\Services\SubscriptionService;
 
 $subscriptionEndpoint->createPlan($planRequest);
 $subscriptionEndpoint->listPlans($filters);
@@ -177,8 +185,9 @@ $subscriptionEndpoint->deleteSubscription($subId);
 ```
 
 #### Fiat Payouts
+
 ```php
-use SerenityTechnologies\NowPayments\Endpoints\FiatPayoutEndpoint;
+use SerenityTechnologies\NowPayments\Services\FiatPayoutService;
 
 $fiatPayoutEndpoint->getProviders();
 $fiatPayoutEndpoint->getFiatCurrencies();
@@ -408,7 +417,7 @@ src/
 ├── DTOs/
 │   ├── Request/                        # Request DTOs (20 files)
 │   └── Response/                       # Response DTOs (40 files)
-├── Endpoints/                          # API endpoint classes (9 files)
+├── Services/                          # API endpoint classes (9 files)
 │   ├── AuthEndpoint.php
 │   ├── CurrencyEndpoint.php
 │   ├── PaymentEndpoint.php
@@ -453,9 +462,9 @@ src/
 - **Status Enums**: Type-safe enums for payment, payout, conversion, and subscription statuses
 - **Laravel Events**: Auto-fired events for webhook processing
 
-## API Endpoints Coverage
+## API Services Coverage
 
-| Category | Endpoints | Status |
+| Category | Services | Status |
 |----------|-----------|--------|
 | Auth & API Status | 2 | ✅ |
 | Currencies | 3 | ✅ |

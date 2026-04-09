@@ -3,7 +3,7 @@
 /**
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\DTOs\Request\AuthRequest;
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
@@ -11,7 +11,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\ApiStatusResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\AuthResponse;
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
-class AuthEndpoint
+class AuthService
 {
     public function __construct(
         protected NowPaymentsClient $client

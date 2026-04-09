@@ -3,13 +3,13 @@
 /**
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Response\CurrencyResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\FullCurrencyResponse;
 
-class CurrencyEndpoint
+class CurrencyService
 {
     public function __construct(
         protected NowPaymentsClient $client

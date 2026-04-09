@@ -3,16 +3,16 @@
 namespace SerenityTechnologies\NowPayments;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
-use SerenityTechnologies\NowPayments\Endpoints\{
-    AuthEndpoint,
-    CurrencyEndpoint,
-    PaymentEndpoint,
-    InvoiceEndpoint,
-    PayoutEndpoint,
-    ConversionEndpoint,
-    SubPartnerEndpoint,
-    SubscriptionEndpoint,
-    FiatPayoutEndpoint
+use SerenityTechnologies\NowPayments\Services\{
+    AuthService,
+    CurrencyService,
+    PaymentService,
+    InvoiceService,
+    PayoutService,
+    ConversionService,
+    SubPartnerService,
+    SubscriptionService,
+    FiatPayoutService
 };
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 use SerenityTechnologies\NowPayments\Handlers\IpnHandler;
@@ -83,17 +83,17 @@ use SerenityTechnologies\NowPayments\DTOs\Response\{
 class NowPaymentsManager
 {
     public function __construct(
-        protected AuthEndpoint $auth,
-        protected CurrencyEndpoint $currency,
-        protected PaymentEndpoint $payment,
-        protected InvoiceEndpoint $invoice,
-        protected PayoutEndpoint $payout,
-        protected ConversionEndpoint $conversion,
-        protected SubPartnerEndpoint $subPartner,
-        protected SubscriptionEndpoint $subscription,
-        protected FiatPayoutEndpoint $fiatPayout,
-        protected IpnHandler $ipnHandler,
-        protected NowPaymentsClient $client
+        protected AuthService         $auth,
+        protected CurrencyService     $currency,
+        protected PaymentService      $payment,
+        protected InvoiceService      $invoice,
+        protected PayoutService       $payout,
+        protected ConversionService   $conversion,
+        protected SubPartnerService   $subPartner,
+        protected SubscriptionService $subscription,
+        protected FiatPayoutService   $fiatPayout,
+        protected IpnHandler          $ipnHandler,
+        protected NowPaymentsClient   $client
     ) {
     }
 
@@ -178,6 +178,9 @@ class NowPaymentsManager
         return $this->payout->getBalance();
     }
 
+    /**
+     * @throws NowPaymentsException
+     */
     public function validateAddress(PayoutAddressRequest $request): bool
     {
         return $this->payout->validateAddress($request);
@@ -373,11 +376,17 @@ class NowPaymentsManager
 
     /* ==================== IPN / Webhooks ==================== */
 
+    /**
+     * @throws NowPaymentsException
+     */
     public function verifyIpnSignature(array $data, string $signature): bool
     {
         return $this->ipnHandler->verifySignature($data, $signature);
     }
 
+    /**
+     * @throws NowPaymentsException
+     */
     public function processIpn(array $data, string $signature): array
     {
         return $this->ipnHandler->processIpn($data, $signature);

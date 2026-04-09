@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\EstimateRequest;
@@ -20,7 +20,7 @@ use SerenityTechnologies\NowPayments\QueryBuilders\PaymentListQueryBuilder;
  * @see https://documenter.getpostman.com/view/7549238/SVfJ6R1w
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-class PaymentEndpoint
+class PaymentService
 {
     public function __construct(
         protected NowPaymentsClient $client

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\FiatAccountRequest;
@@ -18,7 +18,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\FiatPayoutListResponse;
  * Endpoint for fiat payout-related operations.
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-class FiatPayoutEndpoint
+class FiatPayoutService
 {
     public function __construct(
         protected NowPaymentsClient $client

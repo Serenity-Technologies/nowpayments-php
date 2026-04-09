@@ -22,7 +22,7 @@ Use this skill when:
 The package has 4 layers:
 
 1. **Client** (`NowPaymentsClient`) - HTTP client handling auth, JWT expiry (4-min TTL), SSL verification, JSON error handling
-2. **Endpoints** - 9 classes wrapping API groups, accepting Request DTOs, returning Response DTOs
+2. **Services** - 9 classes wrapping API groups, accepting Request DTOs, returning Response DTOs
 3. **Manager** (`NowPaymentsManager`) - Unified proxy to all 9 endpoints + IpnHandler, exposed via `NowPayments` facade
 4. **Support** - 4 status enums, 3 Laravel events, webhook trait, query builders
 

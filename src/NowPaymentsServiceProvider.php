@@ -8,16 +8,16 @@ namespace SerenityTechnologies\NowPayments;
 use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Support\ServiceProvider;
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
-use SerenityTechnologies\NowPayments\Endpoints\{
-    AuthEndpoint,
-    CurrencyEndpoint,
-    PaymentEndpoint,
-    InvoiceEndpoint,
-    PayoutEndpoint,
-    ConversionEndpoint,
-    SubPartnerEndpoint,
-    SubscriptionEndpoint,
-    FiatPayoutEndpoint
+use SerenityTechnologies\NowPayments\Services\{
+    AuthService,
+    CurrencyService,
+    PaymentService,
+    InvoiceService,
+    PayoutService,
+    ConversionService,
+    SubPartnerService,
+    SubscriptionService,
+    FiatPayoutService
 };
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 use SerenityTechnologies\NowPayments\Handlers\IpnHandler;
@@ -73,66 +73,66 @@ class NowPaymentsServiceProvider extends ServiceProvider
         });
 
         // Register Auth Endpoint
-        $this->app->singleton(AuthEndpoint::class, function ($app) {
+        $this->app->singleton(AuthService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new AuthEndpoint($client);
+            return new AuthService($client);
         });
 
         // Register Currency Endpoint
-        $this->app->singleton(CurrencyEndpoint::class, function ($app) {
+        $this->app->singleton(CurrencyService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new CurrencyEndpoint($client);
+            return new CurrencyService($client);
         });
 
         // Register Payment Endpoint
-        $this->app->singleton(PaymentEndpoint::class, function ($app) {
+        $this->app->singleton(PaymentService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new PaymentEndpoint($client);
+            return new PaymentService($client);
         });
 
         // Register Invoice Endpoint
-        $this->app->singleton(InvoiceEndpoint::class, function ($app) {
+        $this->app->singleton(InvoiceService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new InvoiceEndpoint($client);
+            return new InvoiceService($client);
         });
 
         // Register Payout Endpoint
-        $this->app->singleton(PayoutEndpoint::class, function ($app) {
+        $this->app->singleton(PayoutService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new PayoutEndpoint($client);
+            return new PayoutService($client);
         });
 
         // Register Conversion Endpoint
-        $this->app->singleton(ConversionEndpoint::class, function ($app) {
+        $this->app->singleton(ConversionService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new ConversionEndpoint($client);
+            return new ConversionService($client);
         });
 
         // Register SubPartner Endpoint
-        $this->app->singleton(SubPartnerEndpoint::class, function ($app) {
+        $this->app->singleton(SubPartnerService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new SubPartnerEndpoint($client);
+            return new SubPartnerService($client);
         });
 
         // Register Subscription Endpoint
-        $this->app->singleton(SubscriptionEndpoint::class, function ($app) {
+        $this->app->singleton(SubscriptionService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new SubscriptionEndpoint($client);
+            return new SubscriptionService($client);
         });
 
         // Register FiatPayout Endpoint
-        $this->app->singleton(FiatPayoutEndpoint::class, function ($app) {
+        $this->app->singleton(FiatPayoutService::class, function ($app) {
             /** @var NowPaymentsClient $client */
             $client = $app->make(NowPaymentsClient::class);
-            return new FiatPayoutEndpoint($client);
+            return new FiatPayoutService($client);
         });
 
         // Register IpnHandler
@@ -143,15 +143,15 @@ class NowPaymentsServiceProvider extends ServiceProvider
         // Register Manager (high-level facade proxy)
         $this->app->singleton(NowPaymentsManager::class, function ($app) {
             return new NowPaymentsManager(
-                $app->make(AuthEndpoint::class),
-                $app->make(CurrencyEndpoint::class),
-                $app->make(PaymentEndpoint::class),
-                $app->make(InvoiceEndpoint::class),
-                $app->make(PayoutEndpoint::class),
-                $app->make(ConversionEndpoint::class),
-                $app->make(SubPartnerEndpoint::class),
-                $app->make(SubscriptionEndpoint::class),
-                $app->make(FiatPayoutEndpoint::class),
+                $app->make(AuthService::class),
+                $app->make(CurrencyService::class),
+                $app->make(PaymentService::class),
+                $app->make(InvoiceService::class),
+                $app->make(PayoutService::class),
+                $app->make(ConversionService::class),
+                $app->make(SubPartnerService::class),
+                $app->make(SubscriptionService::class),
+                $app->make(FiatPayoutService::class),
                 $app->make(IpnHandler::class),
                 $app->make(NowPaymentsClient::class)
             );

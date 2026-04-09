@@ -4,7 +4,7 @@ This package provides a comprehensive Laravel integration for the NOWPayments cr
 
 ### Features
 
-- **52 API Endpoints**: Complete coverage of Auth, Currencies, Payments, Invoices, Payouts, Conversions, Sub-Partners, Subscriptions, and Fiat Payouts.
+- **52 API Services**: Complete coverage of Auth, Currencies, Payments, Invoices, Payouts, Conversions, Sub-Partners, Subscriptions, and Fiat Payouts.
 - **Type-Safe DTOs**: Request DTOs with validation (URL format, positive amounts), Response DTOs with explicit numeric casting and `fromArray()` factories.
 - **Status Enums**: `PaymentStatus`, `PayoutStatus`, `ConversionStatus`, `SubscriptionStatus` with helper methods (`isFinal()`, `isSuccessful()`, `isPending()`).
 - **Webhook System**: IPN handler with HMAC-SHA512 verification, `HandlesIpnWebhooks` controller trait, auto-fired Laravel events, idempotency detection (`isRetry()`).
@@ -20,7 +20,7 @@ src/
 ├── Config/nowpayments.php                 # Publishable config
 ├── DTOs/Request/                          # 20 request DTOs with validation
 ├── DTOs/Response/                         # 40 response DTOs with numeric casting + FeeResponse
-├── Endpoints/                             # 9 endpoint classes (auto-resolved via DI)
+├── Services/                             # 9 endpoint classes (auto-resolved via DI)
 ├── Events/                                # Laravel events (PaymentStatusChanged, PayoutCompleted, ConversionFinished)
 ├── Support/                               # 4 enums + HandlesIpnWebhooks trait
 ├── Handlers/IpnHandler.php                # Webhook signature verification + isRetry()
@@ -57,7 +57,7 @@ return [
 
 @verbatim
 <code-snippet name="Create a Payment via DI" lang="php">
-use SerenityTechnologies\NowPayments\Endpoints\PaymentEndpoint;
+use SerenityTechnologies\NowPayments\Services\PaymentEndpoint;
 use SerenityTechnologies\NowPayments\DTOs\Request\PaymentRequest;
 
 public function __construct(private PaymentEndpoint $payments) {}
@@ -165,7 +165,7 @@ The `NowPayments` facade exposes 50+ methods:
 - **Request DTOs**: Use camelCase constructor params, `toArray()` outputs snake_case for API.
 - **Response DTOs**: Use snake_case readonly properties, `fromArray()` casts numerics explicitly: `(int)`, `(float)`.
 - **Endpoint Methods**: Accept Request DTOs, return Response DTOs. Never return raw arrays.
-- **Authentication**: Endpoints needing dashboard auth pass `requiresAuth: true` to client (auto-manages JWT with 4-min TTL).
+- **Authentication**: Services needing dashboard auth pass `requiresAuth: true` to client (auto-manages JWT with 4-min TTL).
 - **Validation**: All Request DTOs validate in endpoint methods (`createPayment()`, etc.) before API call. URL fields validated with `filter_var(FILTER_VALIDATE_URL)`.
 
 ### Environment Variables

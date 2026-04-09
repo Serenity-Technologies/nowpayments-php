@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\SubPartnerRequest;
@@ -19,7 +19,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\PaymentListResponse;
  * Endpoint for sub-partner-related operations.
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-class SubPartnerEndpoint
+class SubPartnerService
 {
     public function __construct(
         protected NowPaymentsClient $client

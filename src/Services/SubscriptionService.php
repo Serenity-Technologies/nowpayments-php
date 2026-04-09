@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\PlanRequest;
@@ -15,7 +15,7 @@ use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
  * Endpoint for subscription-related operations.
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-class SubscriptionEndpoint
+class SubscriptionService
 {
     public function __construct(
         protected NowPaymentsClient $client

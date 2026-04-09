@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\InvoicePaymentRequest;
@@ -14,7 +14,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\PaymentResponse;
  * @see https://documenter.getpostman.com/view/7549238/SVfJ6R1w
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-class InvoiceEndpoint
+class InvoiceService
 {
     public function __construct(
         protected NowPaymentsClient $client

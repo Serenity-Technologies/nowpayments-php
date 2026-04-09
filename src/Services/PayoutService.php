@@ -3,7 +3,7 @@
 /**
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\PayoutListQuery;
@@ -19,7 +19,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\MinWithdrawalAmountResponse;
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 use SerenityTechnologies\NowPayments\QueryBuilders\PayoutListQueryBuilder;
 
-class PayoutEndpoint
+class PayoutService
 {
     public function __construct(
         protected NowPaymentsClient $client

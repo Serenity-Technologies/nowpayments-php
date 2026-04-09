@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Endpoints;
+namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\ConversionRequest;
@@ -11,7 +11,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\ConversionListResponse;
  * Endpoint for conversion-related operations.
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>
  */
-class ConversionEndpoint
+class ConversionService
 {
     public function __construct(
         protected NowPaymentsClient $client
