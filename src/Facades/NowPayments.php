@@ -62,6 +62,15 @@ use SerenityTechnologies\NowPayments\NowPaymentsManager;
  * @method static array processIpn(array $data, string $signature)
  * @method static bool isIpnRetry(array $data)
  * @method static \SerenityTechnologies\NowPayments\Client\NowPaymentsClient client()
+ * @method static \SerenityTechnologies\NowPayments\Services\AuthService authService()
+ * @method static \SerenityTechnologies\NowPayments\Services\PaymentService paymentService()
+ * @method static \SerenityTechnologies\NowPayments\Services\PayoutService payoutService()
+ * @method static \SerenityTechnologies\NowPayments\Services\ConversionService conversionService()
+ * @method static \SerenityTechnologies\NowPayments\Services\CurrencyService currencyService()
+ * @method static \SerenityTechnologies\NowPayments\Services\InvoiceService invoiceService()
+ * @method static \SerenityTechnologies\NowPayments\Services\SubPartnerService subPartnerService()
+ * @method static \SerenityTechnologies\NowPayments\Services\FiatPayoutService fiatPayoutService()
+ * @method static \SerenityTechnologies\NowPayments\Services\SubscriptionService subscriptionService()
  *
  * @see \SerenityTechnologies\NowPayments\NowPaymentsManager
  * @author Kwadwo Kyeremeh <kyerematics@gmail.com>

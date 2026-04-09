@@ -97,6 +97,52 @@ class NowPaymentsManager
     ) {
     }
 
+    public function authService(): AuthService
+    {
+        return $this->auth;
+    }
+
+    public function currencyService(): CurrencyService
+    {
+        return $this->currency;
+    }
+
+    public function paymentService(): PaymentService
+    {
+        return $this->payment;
+    }
+
+    public function invoiceService(): InvoiceService
+    {
+        return $this->invoice;
+    }
+
+    public function payoutService(): PayoutService
+    {
+        return $this->payout;
+    }
+
+    public function conversionService(): ConversionService
+    {
+        return $this->conversion;
+    }
+
+    public function subPartnerService(): SubPartnerService
+    {
+        return $this->subPartner;
+    }
+
+    public function subscriptionService(): SubscriptionService
+    {
+        return $this->subscription;
+    }
+
+    public function fiatPayoutService(): FiatPayoutService
+    {
+        return $this->fiatPayout;
+    }
+
+
     /* ==================== Auth & Status ==================== */
 
     public function getStatus(): ApiStatusResponse
@@ -216,6 +262,9 @@ class NowPaymentsManager
         return $this->payout->getMinWithdrawalAmount($coin);
     }
 
+    /**
+     * @throws NowPaymentsException
+     */
     public function getPayoutFeeEstimate(): FeeEstimateResponse
     {
         return $this->payout->getPayoutFeeEstimate();
