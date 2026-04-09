@@ -83,9 +83,9 @@ class SubscriptionService
     public function updatePlan(string $planId, array $data): PlanResponse
     {
         $response = $this->client->patch('/v1/subscriptions/plans/' . $planId, $data, requiresAuth: true);
-        $data = PlanResponse::unwrapResult($response);
+        $result = PlanResponse::unwrapResult($response);
 
-        return PlanResponse::fromArray($data);
+        return PlanResponse::fromArray($result);
     }
 
     /**

@@ -33,12 +33,12 @@ class PlanListResponse extends BaseResponseDto
         
         $plans = array_map(
             fn(array $item) => PlanResponse::fromArray($item),
-            is_array($plansData) ? $plansData : []
+            is_array($plansData) && array_is_list($plansData) ? $plansData : []
         );
 
         return new self(
             plans: $plans,
-            count: $data['count'] ?? null,
+            count: $data['count'] ?? ($plansData['count'] ?? null),
         );
     }
 }

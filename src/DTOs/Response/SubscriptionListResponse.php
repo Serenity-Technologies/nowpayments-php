@@ -33,12 +33,12 @@ class SubscriptionListResponse extends BaseResponseDto
         
         $subscriptions = array_map(
             fn(array $item) => SubscriptionResponse::fromArray($item),
-            is_array($subscriptionsData) ? $subscriptionsData : []
+            is_array($subscriptionsData) && array_is_list($subscriptionsData) ? $subscriptionsData : []
         );
 
         return new self(
             subscriptions: $subscriptions,
-            count: $data['count'] ?? null,
+            count: $data['count'] ?? ($subscriptionsData['count'] ?? null),
         );
     }
 }

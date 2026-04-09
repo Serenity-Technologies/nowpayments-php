@@ -32,7 +32,7 @@ class FiatProvidersResponse extends BaseResponseDto
         
         $providers = array_map(
             fn(array $item) => FiatProviderResponse::fromArray($item),
-            is_array($providersData) ? $providersData : []
+            is_array($providersData) && array_is_list($providersData) ? $providersData : []
         );
 
         return new self(

@@ -57,16 +57,4 @@ class PlanResponse extends BaseResponseDto
             updatedAt: $data['updated_at'] ?? null,
         );
     }
-
-    /**
-     * Unwrap result from API response.
-     * API returns { "result": { ...plan data... } }
-     *
-     * @param array $data
-     * @return array
-     */
-    public static function unwrapResult(array $data): array
-    {
-        return $data['result'] ?? $data;
-    }
 }

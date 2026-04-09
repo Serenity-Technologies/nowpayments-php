@@ -28,11 +28,11 @@ class FiatCurrenciesResponse extends BaseResponseDto
     public static function fromArray(array $data): static
     {
         // Unwrap result if present (fiat endpoints wrap in 'result')
-        $currenciesData = $data['result'] ?? $data['data'] ?? $data;
+        $currenciesData = $data['result'] ?? $data['data'] ?? null;
         
         $currencies = array_map(
             fn(array $item) => FiatCurrencyResponse::fromArray($item),
-            is_array($currenciesData) ? $currenciesData : []
+            is_array($currenciesData) && array_is_list($currenciesData) ? $currenciesData : []
         );
 
         return new self(

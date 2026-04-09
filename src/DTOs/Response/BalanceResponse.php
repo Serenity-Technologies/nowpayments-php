@@ -27,14 +27,9 @@ class BalanceResponse extends BaseResponseDto
      */
     public static function fromArray(array $data): static
     {
-        // Handle empty array response (no balance)
-        if (empty($data)) {
-            return new self(balances: []);
-        }
+        // Unwrap result if present, fallback to raw $data (API returns currency keys at root level)
+        $balancesData = $data['result'] ?? $data['balances'] ?? $data;
 
-        // Unwrap result if present
-        $balancesData = $data['result'] ?? $data['balances'] ?? [];
-        
         $balances = [];
         foreach ($balancesData as $currency => $balance) {
             $balances[$currency] = [
