@@ -30,6 +30,7 @@ use SerenityTechnologies\NowPayments\DTOs\Request\{
     SubPartnerDepositRequest,
     TransferRequest,
     PlanRequest,
+    UpdatePlanRequest,
     SubscriptionRequest,
     FiatAccountRequest,
     FiatPayoutRequest,
@@ -356,9 +357,9 @@ class NowPaymentsManager
         return $this->subscription->getPlan($planId);
     }
 
-    public function updatePlan(string $planId, array $data): PlanResponse
+    public function updatePlan(string $planId, UpdatePlanRequest $request): PlanResponse
     {
-        return $this->subscription->updatePlan($planId, $data);
+        return $this->subscription->updatePlan($planId, $request);
     }
 
     public function createSubscription(SubscriptionRequest $request): SubscriptionResponse

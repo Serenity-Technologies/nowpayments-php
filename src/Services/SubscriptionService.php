@@ -4,6 +4,7 @@ namespace SerenityTechnologies\NowPayments\Services;
 
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Request\PlanRequest;
+use SerenityTechnologies\NowPayments\DTOs\Request\UpdatePlanRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\SubscriptionRequest;
 use SerenityTechnologies\NowPayments\DTOs\Response\PlanResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\PlanListResponse;
@@ -75,14 +76,15 @@ class SubscriptionService
      * Update a subscription plan by ID.
      *
      * @param string $planId The plan ID
-     * @param array<string, mixed> $data The plan data
+     * @param UpdatePlanRequest $request The plan update data
      * @return PlanResponse
      *
      * @see https://api.nowpayments.io/v1/subscriptions/plans/{id}
      */
-    public function updatePlan(string $planId, array $data): PlanResponse
+    public function updatePlan(string $planId, UpdatePlanRequest $request): PlanResponse
     {
-        $response = $this->client->patch('/v1/subscriptions/plans/' . $planId, $data, requiresAuth: true);
+        $request->validate();
+        $response = $this->client->patch('/v1/subscriptions/plans/' . $planId, $request->toArray(), requiresAuth: true);
         $result = PlanResponse::unwrapResult($response);
 
         return PlanResponse::fromArray($result);
