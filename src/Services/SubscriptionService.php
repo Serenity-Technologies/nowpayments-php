@@ -35,8 +35,9 @@ class SubscriptionService
     {
         $request->validate();
         $response = $this->client->post('/v1/subscriptions/plans', $request->toArray(), requiresAuth: true);
+        $data = PlanResponse::unwrapResult($response);
 
-        return PlanResponse::fromArray($response);
+        return PlanResponse::fromArray($data);
     }
 
     /**
@@ -65,8 +66,9 @@ class SubscriptionService
     public function getPlan(string $planId): PlanResponse
     {
         $response = $this->client->get('/v1/subscriptions/plans/' . $planId, query: [], requiresAuth: false);
+        $data = PlanResponse::unwrapResult($response);
 
-        return PlanResponse::fromArray($response);
+        return PlanResponse::fromArray($data);
     }
 
     /**
@@ -81,8 +83,9 @@ class SubscriptionService
     public function updatePlan(string $planId, array $data): PlanResponse
     {
         $response = $this->client->patch('/v1/subscriptions/plans/' . $planId, $data, requiresAuth: true);
+        $data = PlanResponse::unwrapResult($response);
 
-        return PlanResponse::fromArray($response);
+        return PlanResponse::fromArray($data);
     }
 
     /**
@@ -97,8 +100,9 @@ class SubscriptionService
     {
         $request->validate();
         $response = $this->client->post('/v1/subscriptions', $request->toArray(), requiresAuth: true);
+        $data = SubscriptionResponse::unwrapResult($response);
 
-        return SubscriptionResponse::fromArray($response);
+        return SubscriptionResponse::fromArray($data);
     }
 
     /**
@@ -127,8 +131,9 @@ class SubscriptionService
     public function getSubscription(string $subId): SubscriptionResponse
     {
         $response = $this->client->get('/v1/subscriptions/' . $subId, query: [], requiresAuth: false);
+        $data = SubscriptionResponse::unwrapResult($response);
 
-        return SubscriptionResponse::fromArray($response);
+        return SubscriptionResponse::fromArray($data);
     }
 
     /**

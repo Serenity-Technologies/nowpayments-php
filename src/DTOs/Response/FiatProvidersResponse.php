@@ -20,15 +20,19 @@ class FiatProvidersResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
+     *     result?: array[],
      *     data?: array[],
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
+        // Unwrap result if present (fiat endpoints wrap in 'result')
+        $providersData = $data['result'] ?? $data['data'] ?? $data;
+        
         $providers = array_map(
             fn(array $item) => FiatProviderResponse::fromArray($item),
-            $data['data'] ?? $data
+            is_array($providersData) ? $providersData : []
         );
 
         return new self(

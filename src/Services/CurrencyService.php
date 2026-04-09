@@ -24,7 +24,7 @@ class CurrencyService
      */
     public function getAvailableCurrencies(bool $fixedRate = false): CurrencyResponse
     {
-        $response = $this->client->get('/v1/currencies', ['fixed_rate' => $fixedRate]);
+        $response = $this->client->get('/v1/currencies', ['fixed_rate' => $fixedRate ? 'true' : 'false']);
         return CurrencyResponse::fromArray($response);
     }
 

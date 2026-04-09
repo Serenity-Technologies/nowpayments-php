@@ -54,4 +54,16 @@ class SubscriptionResponse extends BaseResponseDto
             next_billing_date: $data['next_billing_date'] ?? null,
         );
     }
+
+    /**
+     * Unwrap result from API response.
+     * API returns { "result": { ...subscription data... } }
+     *
+     * @param array $data
+     * @return array
+     */
+    public static function unwrapResult(array $data): array
+    {
+        return $data['result'] ?? $data;
+    }
 }

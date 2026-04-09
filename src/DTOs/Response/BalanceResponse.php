@@ -20,14 +20,23 @@ class BalanceResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
-     *     balances: array<string, array{amount: float, pendingAmount: float}>,
+     *     balances?: array<string, array{amount: float, pendingAmount: float}>,
+     *     result?: array<string, array{amount: float, pendingAmount: float}>,
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
+        // Handle empty array response (no balance)
+        if (empty($data)) {
+            return new self(balances: []);
+        }
+
+        // Unwrap result if present
+        $balancesData = $data['result'] ?? $data['balances'] ?? [];
+        
         $balances = [];
-        foreach ($data['balances'] as $currency => $balance) {
+        foreach ($balancesData as $currency => $balance) {
             $balances[$currency] = [
                 'amount' => isset($balance['amount']) ? (float) $balance['amount'] : 0.0,
                 'pendingAmount' => isset($balance['pendingAmount']) ? (float) $balance['pendingAmount'] : 0.0,

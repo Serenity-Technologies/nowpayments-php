@@ -13,8 +13,7 @@ class PlanListResponse extends BaseResponseDto
      */
     public function __construct(
         public readonly array $plans,
-        public readonly ?int $total,
-        public readonly ?string $next,
+        public readonly ?int $count,
     ) {
     }
 
@@ -22,23 +21,24 @@ class PlanListResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
-     *     data?: array[],
-     *     total?: int|null,
-     *     next?: string|null,
+     *     result?: array[],
+     *     count?: int|null,
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
+        // Unwrap result if present
+        $plansData = $data['result'] ?? $data;
+        
         $plans = array_map(
             fn(array $item) => PlanResponse::fromArray($item),
-            $data['data'] ?? []
+            is_array($plansData) ? $plansData : []
         );
 
         return new self(
             plans: $plans,
-            total: $data['total'] ?? null,
-            next: $data['next'] ?? null,
+            count: $data['count'] ?? null,
         );
     }
 }

@@ -10,15 +10,16 @@ class PlanResponse extends BaseResponseDto
 {
     public function __construct(
         public readonly ?string $id,
-        public readonly ?string $name,
-        public readonly ?string $description,
-        public readonly ?float $price,
+        public readonly ?string $title,
+        public readonly ?int $intervalDay,
+        public readonly ?float $amount,
         public readonly ?string $currency,
-        public readonly ?string $interval,
-        public readonly ?int $interval_count,
-        public readonly ?string $status,
-        public readonly ?string $created_at,
-        public readonly ?string $updated_at,
+        public readonly ?string $ipnCallbackUrl,
+        public readonly ?string $successUrl,
+        public readonly ?string $cancelUrl,
+        public readonly ?string $partiallyPaidUrl,
+        public readonly ?string $createdAt,
+        public readonly ?string $updatedAt,
     ) {
     }
 
@@ -27,13 +28,14 @@ class PlanResponse extends BaseResponseDto
      *
      * @param array{
      *     id?: string|null,
-     *     name?: string|null,
-     *     description?: string|null,
-     *     price?: float|null,
+     *     title?: string|null,
+     *     interval_day?: string|int|null,
+     *     amount?: float|int|string|null,
      *     currency?: string|null,
-     *     interval?: string|null,
-     *     interval_count?: int|null,
-     *     status?: string|null,
+     *     ipn_callback_url?: string|null,
+     *     success_url?: string|null,
+     *     cancel_url?: string|null,
+     *     partially_paid_url?: string|null,
      *     created_at?: string|null,
      *     updated_at?: string|null,
      * } $data
@@ -43,15 +45,28 @@ class PlanResponse extends BaseResponseDto
     {
         return new self(
             id: $data['id'] ?? null,
-            name: $data['name'] ?? null,
-            description: $data['description'] ?? null,
-            price: isset($data['price']) ? (float) $data['price'] : null,
+            title: $data['title'] ?? null,
+            intervalDay: isset($data['interval_day']) ? (int) $data['interval_day'] : null,
+            amount: isset($data['amount']) ? (float) $data['amount'] : null,
             currency: $data['currency'] ?? null,
-            interval: $data['interval'] ?? null,
-            interval_count: isset($data['interval_count']) ? (int) $data['interval_count'] : null,
-            status: $data['status'] ?? null,
-            created_at: $data['created_at'] ?? null,
-            updated_at: $data['updated_at'] ?? null,
+            ipnCallbackUrl: $data['ipn_callback_url'] ?? null,
+            successUrl: $data['success_url'] ?? null,
+            cancelUrl: $data['cancel_url'] ?? null,
+            partiallyPaidUrl: $data['partially_paid_url'] ?? null,
+            createdAt: $data['created_at'] ?? null,
+            updatedAt: $data['updated_at'] ?? null,
         );
+    }
+
+    /**
+     * Unwrap result from API response.
+     * API returns { "result": { ...plan data... } }
+     *
+     * @param array $data
+     * @return array
+     */
+    public static function unwrapResult(array $data): array
+    {
+        return $data['result'] ?? $data;
     }
 }
