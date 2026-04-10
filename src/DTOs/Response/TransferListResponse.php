@@ -13,8 +13,7 @@ class TransferListResponse extends BaseResponseDto
      */
     public function __construct(
         public readonly array $transfers,
-        public readonly ?int $total,
-        public readonly ?string $next,
+        public readonly ?int $count = null,
     ) {
     }
 
@@ -22,23 +21,25 @@ class TransferListResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
+     *     result?: array[],
+     *     count?: int|null,
      *     data?: array[],
      *     total?: int|null,
-     *     next?: string|null,
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
+        // Handle both {result: [...], count: N} and {data: [...], total: N} formats
+        $transfersData = $data['result'] ?? $data['data'] ?? [];
         $transfers = array_map(
             fn(array $item) => TransferResponse::fromArray($item),
-            $data['data'] ?? []
+            is_array($transfersData) ? $transfersData : []
         );
 
         return new self(
             transfers: $transfers,
-            total: $data['total'] ?? null,
-            next: $data['next'] ?? null,
+            count: $data['count'] ?? $data['total'] ?? null,
         );
     }
 }

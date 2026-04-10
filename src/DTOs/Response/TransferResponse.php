@@ -13,8 +13,8 @@ class TransferResponse extends BaseResponseDto
         public readonly ?string $status,
         public readonly ?float $amount,
         public readonly ?string $currency,
-        public readonly ?string $from_id,
-        public readonly ?string $to_id,
+        public readonly ?string $from_sub_id,
+        public readonly ?string $to_sub_id,
         public readonly ?string $created_at,
         public readonly ?string $updated_at,
     ) {
@@ -26,10 +26,10 @@ class TransferResponse extends BaseResponseDto
      * @param array{
      *     id?: string|null,
      *     status?: string|null,
-     *     amount?: float|null,
+     *     amount?: string|float|null,
      *     currency?: string|null,
-     *     from_id?: string|null,
-     *     to_id?: string|null,
+     *     from_sub_id?: string|null,
+     *     to_sub_id?: string|null,
      *     created_at?: string|null,
      *     updated_at?: string|null,
      * } $data
@@ -42,8 +42,8 @@ class TransferResponse extends BaseResponseDto
             status: $data['status'] ?? null,
             amount: isset($data['amount']) ? (float) $data['amount'] : null,
             currency: $data['currency'] ?? null,
-            from_id: $data['from_id'] ?? null,
-            to_id: $data['to_id'] ?? null,
+            from_sub_id: $data['from_sub_id'] ?? null,
+            to_sub_id: $data['to_sub_id'] ?? null,
             created_at: $data['created_at'] ?? null,
             updated_at: $data['updated_at'] ?? null,
         );
