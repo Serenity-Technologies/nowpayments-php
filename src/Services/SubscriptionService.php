@@ -62,9 +62,10 @@ class SubscriptionService
      * @param string $planId The plan ID
      * @return PlanResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions/plans/{id}
      */
-    public function getPlan(string $planId): PlanResponse
+    public function getPlan(string|int $planId): PlanResponse
     {
         $response = $this->client->get('/v1/subscriptions/plans/' . $planId, query: [], requiresAuth: false);
         $data = PlanResponse::unwrapResult($response);
@@ -75,13 +76,14 @@ class SubscriptionService
     /**
      * Update a subscription plan by ID.
      *
-     * @param string $planId The plan ID
+     * @param string|int $planId The plan ID
      * @param UpdatePlanRequest $request The plan update data
      * @return PlanResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions/plans/{id}
      */
-    public function updatePlan(string $planId, UpdatePlanRequest $request): PlanResponse
+    public function updatePlan(string|int $planId, UpdatePlanRequest $request): PlanResponse
     {
         $request->validate();
         $response = $this->client->patch('/v1/subscriptions/plans/' . $planId, $request->toArray(), requiresAuth: true);

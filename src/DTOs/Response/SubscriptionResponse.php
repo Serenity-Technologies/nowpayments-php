@@ -9,16 +9,16 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 class SubscriptionResponse extends BaseResponseDto
 {
     public function __construct(
-        public readonly ?string $id,
-        public readonly ?string $planId,
-        public readonly ?string $status,
-        public readonly ?string $customerId,
-        public readonly ?string $customerEmail,
-        public readonly ?float $amount,
-        public readonly ?string $currency,
-        public readonly ?string $createdAt,
-        public readonly ?string $updatedAt,
-        public readonly ?string $nextBillingDate,
+        public readonly ?string         $id,
+        public readonly string|int|null $planId,
+        public readonly ?string         $status,
+        public readonly ?string         $customerId,
+        public readonly ?string         $customerEmail,
+        public readonly ?float          $amount,
+        public readonly ?string         $currency,
+        public readonly ?string         $createdAt,
+        public readonly ?string         $updatedAt,
+        public readonly ?string         $nextBillingDate,
     ) {
     }
 
@@ -27,7 +27,7 @@ class SubscriptionResponse extends BaseResponseDto
      *
      * @param array{
      *     id?: string|null,
-     *     plan_id?: string|null,
+     *     plan_id?: string|int|null,
      *     status?: string|null,
      *     customer_id?: string|null,
      *     customer_email?: string|null,

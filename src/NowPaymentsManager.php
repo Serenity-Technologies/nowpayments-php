@@ -352,12 +352,18 @@ class NowPaymentsManager
         return $this->subscription->listPlans($filters);
     }
 
-    public function getPlan(string $planId): PlanResponse
+    /**
+     * @throws NowPaymentsException
+     */
+    public function getPlan(string|int $planId): PlanResponse
     {
         return $this->subscription->getPlan($planId);
     }
 
-    public function updatePlan(string $planId, UpdatePlanRequest $request): PlanResponse
+    /**
+     * @throws NowPaymentsException
+     */
+    public function updatePlan(string|int $planId, UpdatePlanRequest $request): PlanResponse
     {
         return $this->subscription->updatePlan($planId, $request);
     }

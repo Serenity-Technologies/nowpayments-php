@@ -13,12 +13,12 @@ namespace SerenityTechnologies\NowPayments\DTOs\Request;
 class SubscriptionRequest extends BaseRequestDto
 {
     /**
-     * @param int $subscriptionPlanId ID of the subscription plan to subscribe to.
+     * @param int|string $subscriptionPlanId ID of the subscription plan to subscribe to.
      * @param int|null $subPartnerId ID of the sub-partner (if applicable).
      * @param string|null $email Email address of the subscriber.
      */
     public function __construct(
-        public readonly int $subscriptionPlanId,
+        public readonly int|string $subscriptionPlanId,
         public readonly ?int $subPartnerId = null,
         public readonly ?string $email = null,
     ) {
@@ -58,7 +58,7 @@ class SubscriptionRequest extends BaseRequestDto
 
     public function validate(): bool
     {
-        if ($this->subscriptionPlanId <= 0) {
+        if ((int)$this->subscriptionPlanId <= 0) {
             throw new \InvalidArgumentException('subscription_plan_id must be a positive integer.');
         }
 
