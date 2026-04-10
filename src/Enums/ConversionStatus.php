@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Support;
+namespace SerenityTechnologies\NowPayments\Enums;
 
 /**
  * Conversion status enum for NOWPayments.

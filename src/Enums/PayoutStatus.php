@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Support;
+namespace SerenityTechnologies\NowPayments\Enums;
 
 /**
  * Payout status enum for NOWPayments.
@@ -15,14 +15,14 @@ enum PayoutStatus: string
     case Finished = 'finished';
     case Failed = 'failed';
     case Rejected = 'rejected';
-    case Cancelled = 'cancelled';
+    // case Cancelled = 'cancelled';
 
     /**
      * Check if payout is completed.
      */
     public function isFinal(): bool
     {
-        return in_array($this, [self::Finished, self::Failed, self::Rejected, self::Cancelled], true);
+        return in_array($this, [self::Finished, self::Failed, self::Rejected], true); //self::Cancelled
     }
 
     /**

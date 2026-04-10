@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SerenityTechnologies\NowPayments\Support;
+namespace SerenityTechnologies\NowPayments\Enums;
 
 /**
  * Payment status enum for NOWPayments.
