@@ -13,6 +13,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\FiatAccountResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\FiatAccountListResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\FiatPayoutResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\FiatPayoutListResponse;
+use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
 /**
  * Endpoint for fiat payout-related operations.
@@ -60,6 +61,7 @@ class FiatPayoutService
      * @param string $currency The fiat currency
      * @return FiatCryptoCurrenciesResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/fiat-payouts/crypto-currencies
      */
     public function getCryptoCurrencies(string $provider, string $currency): FiatCryptoCurrenciesResponse
@@ -80,6 +82,7 @@ class FiatPayoutService
      * @param string $currency The fiat currency
      * @return FiatPaymentMethodsResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/fiat-payouts/payment-methods
      */
     public function getPaymentMethods(string $provider, string $currency): FiatPaymentMethodsResponse
@@ -99,6 +102,7 @@ class FiatPayoutService
      * @param FiatAccountRequest $request
      * @return FiatAccountResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/fiat-payouts/account
      */
     public function createAccount(FiatAccountRequest $request): FiatAccountResponse
@@ -115,6 +119,7 @@ class FiatPayoutService
      * @param array<string, mixed> $filters
      * @return FiatAccountListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/fiat-payouts/accounts
      */
     public function listAccounts(array $filters = []): FiatAccountListResponse
@@ -130,6 +135,7 @@ class FiatPayoutService
      * @param FiatPayoutRequest $request
      * @return FiatPayoutResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/fiat-payouts
      */
     public function requestFiatPayout(FiatPayoutRequest $request): FiatPayoutResponse
@@ -146,6 +152,7 @@ class FiatPayoutService
      * @param array<string, mixed> $filters
      * @return FiatPayoutListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/fiat-payouts
      */
     public function listFiatPayouts(array $filters = []): FiatPayoutListResponse

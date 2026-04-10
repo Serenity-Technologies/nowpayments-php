@@ -33,6 +33,7 @@ class PaymentService
      * @param PaymentRequest $request
      * @return PaymentResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/payment
      */
     public function createPayment(PaymentRequest $request): PaymentResponse
@@ -49,6 +50,7 @@ class PaymentService
      * @param string $paymentId The payment ID
      * @return PaymentResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/payment/{id}
      */
     public function getPaymentStatus(string $paymentId): PaymentResponse
@@ -64,6 +66,7 @@ class PaymentService
      * @param PaymentListQuery|PaymentListQueryBuilder|array $query
      * @return PaymentListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/payment/
      */
     public function getListPayments(PaymentListQuery|PaymentListQueryBuilder|array $query): PaymentListResponse
@@ -88,6 +91,7 @@ class PaymentService
      * @param EstimateRequest $request
      * @return EstimateResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/estimate
      */
     public function getEstimate(EstimateRequest $request): EstimateResponse

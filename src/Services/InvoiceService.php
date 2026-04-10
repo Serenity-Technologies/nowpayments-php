@@ -7,6 +7,7 @@ use SerenityTechnologies\NowPayments\DTOs\Request\InvoicePaymentRequest;
 use SerenityTechnologies\NowPayments\DTOs\Request\InvoiceRequest;
 use SerenityTechnologies\NowPayments\DTOs\Response\InvoiceResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\PaymentResponse;
+use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
 /**
  * Endpoint for invoice-related operations.
@@ -27,6 +28,7 @@ class InvoiceService
      * @param InvoiceRequest $request
      * @return InvoiceResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/invoice
      */
     public function createInvoice(InvoiceRequest $request): InvoiceResponse
@@ -43,6 +45,7 @@ class InvoiceService
      * @param InvoicePaymentRequest $request
      * @return PaymentResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/invoice-payment
      */
     public function createInvoicePayment(InvoicePaymentRequest $request): PaymentResponse

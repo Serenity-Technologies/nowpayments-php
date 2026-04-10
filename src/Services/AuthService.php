@@ -22,6 +22,7 @@ class AuthService
      * Get API status.
      *
      * @return ApiStatusResponse
+     * @throws NowPaymentsException
      */
     public function getStatus(): ApiStatusResponse
     {

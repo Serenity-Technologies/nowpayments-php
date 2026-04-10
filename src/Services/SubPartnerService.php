@@ -14,6 +14,7 @@ use SerenityTechnologies\NowPayments\DTOs\Response\TransferResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\TransferListResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\PaymentResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\PaymentListResponse;
+use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
 /**
  * Endpoint for sub-partner-related operations.
@@ -32,6 +33,7 @@ class SubPartnerService
      * @param SubPartnerRequest $request
      * @return SubPartnerResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/balance
      */
     public function createSubPartner(SubPartnerRequest $request): SubPartnerResponse
@@ -48,6 +50,7 @@ class SubPartnerService
      * @param string $id The sub-partner ID
      * @return BalanceResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/balance/{id}
      */
     public function getSubPartnerBalance(string $id): BalanceResponse
@@ -63,6 +66,7 @@ class SubPartnerService
      * @param array<string, mixed> $filters
      * @return SubPartnerListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner
      */
     public function listSubPartners(array $filters = []): SubPartnerListResponse
@@ -78,6 +82,7 @@ class SubPartnerService
      * @param TransferRequest $request
      * @return TransferResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/transfer
      */
     public function transferFunds(TransferRequest $request): TransferResponse
@@ -94,6 +99,7 @@ class SubPartnerService
      * @param string $id The transfer ID
      * @return TransferResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/transfer/{id}
      */
     public function getTransfer(string $id): TransferResponse
@@ -109,6 +115,7 @@ class SubPartnerService
      * @param array<string, mixed> $filters
      * @return TransferListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/transfers
      */
     public function listTransfers(array $filters = []): TransferListResponse
@@ -124,6 +131,7 @@ class SubPartnerService
      * @param SubPartnerDepositRequest $request
      * @return TransferResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/deposit
      */
     public function depositToSubPartner(SubPartnerDepositRequest $request): TransferResponse
@@ -140,6 +148,7 @@ class SubPartnerService
      * @param SubPartnerDepositRequest $request
      * @return TransferResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/write-off
      */
     public function writeOffFromSubPartner(SubPartnerDepositRequest $request): TransferResponse
@@ -156,6 +165,7 @@ class SubPartnerService
      * @param SubPartnerPaymentRequest $request
      * @return PaymentResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/payment
      */
     public function createSubPartnerPayment(SubPartnerPaymentRequest $request): PaymentResponse
@@ -172,6 +182,7 @@ class SubPartnerService
      * @param array<string, mixed> $filters
      * @return PaymentListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/sub-partner/payments
      */
     public function getSubPartnerPayments(array $filters = []): PaymentListResponse

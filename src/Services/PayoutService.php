@@ -30,6 +30,7 @@ class PayoutService
      * Get account balance.
      *
      * @return BalanceResponse
+     * @throws NowPaymentsException
      */
     public function getBalance(): BalanceResponse
     {
@@ -42,6 +43,7 @@ class PayoutService
      *
      * @param PayoutAddressRequest $request
      * @return bool
+     * @throws NowPaymentsException
      */
     public function validateAddress(PayoutAddressRequest $request): bool
     {
@@ -63,6 +65,7 @@ class PayoutService
      *
      * @param PayoutRequest $request
      * @return PayoutResponse
+     * @throws NowPaymentsException
      */
     public function createPayout(PayoutRequest $request): PayoutResponse
     {
@@ -76,6 +79,7 @@ class PayoutService
      *
      * @param PayoutListQuery|PayoutListQueryBuilder|array $filters
      * @return PayoutListResponse
+     * @throws NowPaymentsException
      */
     public function listPayouts(PayoutListQuery|PayoutListQueryBuilder|array $filters = []): PayoutListResponse
     {
@@ -97,6 +101,7 @@ class PayoutService
      *
      * @param string $payoutId
      * @return PayoutStatusResponse
+     * @throws NowPaymentsException
      */
     public function getPayoutStatus(string $payoutId): PayoutStatusResponse
     {
@@ -110,6 +115,7 @@ class PayoutService
      * @param string $batchWithdrawalId
      * @param PayoutVerificationRequest $request
      * @return bool
+     * @throws NowPaymentsException
      */
     public function verifyPayout(string $batchWithdrawalId, PayoutVerificationRequest $request): bool
     {
@@ -127,6 +133,7 @@ class PayoutService
      *
      * @param string $withdrawalId
      * @return PayoutStatusResponse
+     * @throws NowPaymentsException
      */
     public function cancelPayout(string $withdrawalId): PayoutStatusResponse
     {
@@ -143,6 +150,7 @@ class PayoutService
      *
      * @param string $coin
      * @return MinWithdrawalAmountResponse
+     * @throws NowPaymentsException
      */
     public function getMinWithdrawalAmount(string $coin): MinWithdrawalAmountResponse
     {

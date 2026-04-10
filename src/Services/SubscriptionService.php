@@ -47,6 +47,7 @@ class SubscriptionService
      * @param array<string, mixed> $filters
      * @return PlanListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions/plans
      */
     public function listPlans(array $filters = []): PlanListResponse
@@ -98,6 +99,7 @@ class SubscriptionService
      * @param SubscriptionRequest $request
      * @return SubscriptionResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions
      */
     public function createSubscription(SubscriptionRequest $request): SubscriptionResponse
@@ -115,6 +117,7 @@ class SubscriptionService
      * @param array<string, mixed> $filters
      * @return SubscriptionListResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions
      */
     public function listSubscriptions(array $filters = []): SubscriptionListResponse
@@ -130,6 +133,7 @@ class SubscriptionService
      * @param string $subId The subscription ID
      * @return SubscriptionResponse
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions/{id}
      */
     public function getSubscription(string $subId): SubscriptionResponse
@@ -146,6 +150,7 @@ class SubscriptionService
      * @param string $subId The subscription ID
      * @return bool
      *
+     * @throws NowPaymentsException
      * @see https://api.nowpayments.io/v1/subscriptions/{id}
      */
     public function deleteSubscription(string $subId): bool

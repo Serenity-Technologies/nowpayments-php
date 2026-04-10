@@ -8,6 +8,7 @@ namespace SerenityTechnologies\NowPayments\Services;
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\DTOs\Response\CurrencyResponse;
 use SerenityTechnologies\NowPayments\DTOs\Response\FullCurrencyResponse;
+use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
 class CurrencyService
 {
@@ -21,6 +22,7 @@ class CurrencyService
      *
      * @param bool $fixedRate
      * @return CurrencyResponse
+     * @throws NowPaymentsException
      */
     public function getAvailableCurrencies(bool $fixedRate = false): CurrencyResponse
     {
@@ -32,6 +34,7 @@ class CurrencyService
      * Get full currencies list with details.
      *
      * @return FullCurrencyResponse
+     * @throws NowPaymentsException
      */
     public function getFullCurrencies(): FullCurrencyResponse
     {
@@ -43,6 +46,7 @@ class CurrencyService
      * Get available checked currencies (from coins settings).
      *
      * @return CurrencyResponse
+     * @throws NowPaymentsException
      */
     public function getMerchantCoins(): CurrencyResponse
     {
