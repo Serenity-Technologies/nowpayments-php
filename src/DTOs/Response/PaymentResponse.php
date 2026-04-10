@@ -116,7 +116,7 @@ class PaymentResponse extends BaseResponseDto
             payment_extra_ids: $data['payment_extra_ids'] ?? null,
             parent_payment_id: isset($data['parent_payment_id']) ? (int) $data['parent_payment_id'] : null,
             origin_type: $data['origin_type'] ?? null,
-            fee: $data['fee'] ?? null,
+            fee: isset($data['fee']) ? FeeResponse::fromArray($data['fee']) : null,
             smart_contract: $data['smart_contract'] ?? null,
             network: $data['network'] ?? null,
             network_precision: isset($data['network_precision']) ? (int) $data['network_precision'] : null,

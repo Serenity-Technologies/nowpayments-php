@@ -8,11 +8,14 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
  */
 class PayoutResponse extends BaseResponseDto
 {
+    /**
+     * @param PayoutStatusResponse[] $withdrawals
+     */
     public function __construct(
         public readonly string $id,
         public readonly array $withdrawals,
-        public readonly ?string $batch_withdrawal_id,
-        public readonly ?string $status,
+        // public readonly ?string $batch_withdrawal_id,
+        // public readonly ?string $status,
     ) {
     }
 
@@ -21,7 +24,7 @@ class PayoutResponse extends BaseResponseDto
      *
      * @param array{
      *     id: string,
-     *     withdrawals: array,
+     *     withdrawals: array[],
      *     batch_withdrawal_id?: string|null,
      *     status?: string|null,
      * } $data
@@ -29,11 +32,16 @@ class PayoutResponse extends BaseResponseDto
      */
     public static function fromArray(array $data): static
     {
+        $withdrawals = array_map(
+            fn(array $item) => PayoutStatusResponse::fromArray($item),
+            $data['withdrawals'] ?? []
+        );
+
         return new self(
             id: $data['id'],
-            withdrawals: $data['withdrawals'],
-            batch_withdrawal_id: $data['batch_withdrawal_id'] ?? null,
-            status: $data['status'] ?? null,
+            withdrawals: $withdrawals,
+            // batch_withdrawal_id: $data['batch_withdrawal_id'] ?? null,
+            // status: $data['status'] ?? null,
         );
     }
 }

@@ -9,11 +9,11 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 class PaymentListResponse extends BaseResponseDto
 {
     /**
-     * @param array $data
-     * @param int   $limit
-     * @param int   $page
-     * @param int   $pagesCount
-     * @param int   $total
+     * @param PaymentResponse[] $data
+     * @param int $limit
+     * @param int $page
+     * @param int $pagesCount
+     * @param int $total
      */
     public function __construct(
         public readonly array $data,
@@ -28,7 +28,7 @@ class PaymentListResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
-     *     data: array,
+     *     data: array[],
      *     limit: int,
      *     page: int,
      *     pagesCount: int,
@@ -38,12 +38,17 @@ class PaymentListResponse extends BaseResponseDto
      */
     public static function fromArray(array $data): static
     {
+        $payments = array_map(
+            fn(array $item) => PaymentResponse::fromArray($item),
+            $data['data'] ?? []
+        );
+
         return new self(
-            data: $data['data'],
-            limit: $data['limit'],
-            page: $data['page'],
-            pagesCount: $data['pagesCount'],
-            total: $data['total'],
+            data: $payments,
+            limit: $data['limit'] ?? 0,
+            page: $data['page'] ?? 0,
+            pagesCount: $data['pagesCount'] ?? 0,
+            total: $data['total'] ?? 0,
         );
     }
 }
