@@ -66,9 +66,9 @@ $payment = $this->payments->createPayment($request);
 ### 1. Create Payment Flow
 
 ```php
-use SerenityTechnologies\NowPayments\Facades\NowPayments;
 use SerenityTechnologies\NowPayments\DTOs\Request\PaymentRequest;
-use SerenityTechnologies\NowPayments\Support\PaymentStatus;
+use SerenityTechnologies\NowPayments\Enums\PaymentStatus;
+use SerenityTechnologies\NowPayments\Facades\NowPayments;
 
 // 1. Get estimate
 $estimate = NowPayments::getEstimate($estimateRequest);
@@ -153,7 +153,7 @@ if (NowPayments::isIpnRetry($data)) {
 ### 4. Check Payment Status with Enums
 
 ```php
-use SerenityTechnologies\NowPayments\Support\PaymentStatus;
+use SerenityTechnologies\NowPayments\Enums\PaymentStatus;
 
 $payment = NowPayments::getPaymentStatus($paymentId);
 $status = PaymentStatus::from($payment->payment_status);

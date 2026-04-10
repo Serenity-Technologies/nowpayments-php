@@ -386,8 +386,7 @@ $isRetry = $ipnHandler->isRetry($postData);
 Use type-safe enums for status checking:
 
 ```php
-use SerenityTechnologies\NowPayments\Support\PaymentStatus;
-use SerenityTechnologies\NowPayments\Support\PayoutStatus;
+use SerenityTechnologies\NowPayments\Enums\PaymentStatus;
 
 $status = PaymentStatus::from($paymentResponse->payment_status);
 
