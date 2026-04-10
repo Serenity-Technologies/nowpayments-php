@@ -5,7 +5,6 @@
  */
 namespace SerenityTechnologies\NowPayments;
 
-use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Support\ServiceProvider;
 use SerenityTechnologies\NowPayments\Client\NowPaymentsClient;
 use SerenityTechnologies\NowPayments\Services\{
@@ -45,30 +44,14 @@ class NowPaymentsServiceProvider extends ServiceProvider
             'nowpayments'
         );
 
-        // Register HTTP Client
-        $this->app->singleton(GuzzleClient::class, function ($app) {
-            return new GuzzleClient([
-                'base_uri' => config('nowpayments.base_url', 'https://api.nowpayments.io'),
-                'timeout' => config('nowpayments.timeout', 30),
-                'verify' => true, // Explicitly enforce SSL certificate verification
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json',
-                ],
-            ]);
-        });
-
         // Register NOWPayments Client
         $this->app->singleton(NowPaymentsClient::class, function ($app) {
-            /** @var GuzzleClient $client */
-            $client = $app->make(GuzzleClient::class);
-
             return new NowPaymentsClient(
-                $client,
                 config('nowpayments.api_key', ''),
                 config('nowpayments.ipn_secret', ''),
                 config('nowpayments.dashboard_email', ''),
-                config('nowpayments.dashboard_password', '')
+                config('nowpayments.dashboard_password', ''),
+                config('nowpayments.base_url', 'https://api.nowpayments.io')
             );
         });
 

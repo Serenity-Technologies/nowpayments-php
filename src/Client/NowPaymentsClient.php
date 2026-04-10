@@ -5,17 +5,18 @@
  */
 namespace SerenityTechnologies\NowPayments\Client;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\GuzzleException;
-use Psr\Http\Message\ResponseInterface;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 use SerenityTechnologies\NowPayments\Exceptions\NowPaymentsException;
 
 class NowPaymentsClient
 {
     /**
-     * @var GuzzleClient
+     * @var string
      */
-    protected GuzzleClient $client;
+    protected string $baseUrl;
 
     /**
      * @var string
@@ -55,24 +56,24 @@ class NowPaymentsClient
     /**
      * NOWPaymentsClient constructor.
      *
-     * @param GuzzleClient $client
      * @param string $apiKey
      * @param string $ipnSecret
      * @param string $dashboardEmail
      * @param string $dashboardPassword
+     * @param string $baseUrl
      */
     public function __construct(
-        GuzzleClient $client,
         string $apiKey,
         string $ipnSecret = '',
         string $dashboardEmail = '',
-        string $dashboardPassword = ''
+        string $dashboardPassword = '',
+        string $baseUrl = 'https://api.nowpayments.io'
     ) {
-        $this->client = $client;
         $this->apiKey = $apiKey;
         $this->ipnSecret = $ipnSecret;
         $this->dashboardEmail = $dashboardEmail;
         $this->dashboardPassword = $dashboardPassword;
+        $this->baseUrl = rtrim($baseUrl, '/');
     }
 
     /**
@@ -86,17 +87,11 @@ class NowPaymentsClient
      */
     public function get(string $uri, array $query = [], bool $requiresAuth = false): array
     {
-        $options = [
-            'query' => $query,
-        ];
-
-        $this->addHeaders($options, $requiresAuth);
-
         try {
-            $response = $this->client->get($uri, $options);
+            $response = $this->buildRequest($requiresAuth)->get($uri, $query);
             return $this->handleResponse($response);
-        } catch (GuzzleException $e) {
-            throw $this->handleGuzzleException($e);
+        } catch (ConnectionException $e) {
+            throw $this->handleConnectionException($e);
         }
     }
 
@@ -111,17 +106,11 @@ class NowPaymentsClient
      */
     public function post(string $uri, array $data = [], bool $requiresAuth = false): array
     {
-        $options = [
-            'json' => $data,
-        ];
-
-        $this->addHeaders($options, $requiresAuth);
-
         try {
-            $response = $this->client->post($uri, $options);
+            $response = $this->buildRequest($requiresAuth)->post($uri, $data);
             return $this->handleResponse($response);
-        } catch (GuzzleException $e) {
-            throw $this->handleGuzzleException($e);
+        } catch (ConnectionException $e) {
+            throw $this->handleConnectionException($e);
         }
     }
 
@@ -136,17 +125,11 @@ class NowPaymentsClient
      */
     public function patch(string $uri, array $data = [], bool $requiresAuth = false): array
     {
-        $options = [
-            'json' => $data,
-        ];
-
-        $this->addHeaders($options, $requiresAuth);
-
         try {
-            $response = $this->client->patch($uri, $options);
+            $response = $this->buildRequest($requiresAuth)->patch($uri, $data);
             return $this->handleResponse($response);
-        } catch (GuzzleException $e) {
-            throw $this->handleGuzzleException($e);
+        } catch (ConnectionException $e) {
+            throw $this->handleConnectionException($e);
         }
     }
 
@@ -160,88 +143,86 @@ class NowPaymentsClient
      */
     public function delete(string $uri, bool $requiresAuth = false): array
     {
-        $options = [];
-
-        $this->addHeaders($options, $requiresAuth);
-
         try {
-            $response = $this->client->delete($uri, $options);
+            $response = $this->buildRequest($requiresAuth)->delete($uri);
             return $this->handleResponse($response);
-        } catch (GuzzleException $e) {
-            throw $this->handleGuzzleException($e);
+        } catch (ConnectionException $e) {
+            throw $this->handleConnectionException($e);
         }
     }
 
     /**
-     * Add required headers to request options.
+     * Build the HTTP request with common headers.
      *
-     * @param array $options
      * @param bool $requiresAuth
-     * @return void
+     * @return PendingRequest
      * @throws NowPaymentsException
      */
-    protected function addHeaders(array &$options, bool $requiresAuth = false): void
+    protected function buildRequest(bool $requiresAuth = false): PendingRequest
     {
-        // Always add API key header
-        $options['headers']['x-api-key'] = $this->apiKey;
+        $request = Http::baseUrl($this->baseUrl)
+            ->withUserAgent('SerenityTechnologies/NowPaymentsClient')
+            ->withHeaders([
+                'x-api-key' => $this->apiKey,
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+            ]);
 
         // Add Bearer token if authentication is required
         if ($requiresAuth) {
             $token = $this->getJwtToken();
-            $options['headers']['Authorization'] = 'Bearer ' . $token;
+            $request->withToken($token);
         }
+
+        return $request->throw(function (Response $response) {
+            if ($response->failed()) {
+                $this->handleFailedResponse($response);
+            }
+        });
     }
 
     /**
      * Handle API response.
      *
-     * @param ResponseInterface $response
+     * @param Response $response
      * @return array
      * @throws NowPaymentsException
      */
-    protected function handleResponse(ResponseInterface $response): array
+    protected function handleResponse(Response $response): array
     {
-        $statusCode = $response->getStatusCode();
-        $contents = $response->getBody()->getContents();
-        $body = json_decode($contents, true);
+        $body = $response->json();
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        if ($body === null || $body === false) {
             throw new NowPaymentsException(
-                'Invalid JSON response: ' . json_last_error_msg(),
-                $statusCode
+                'Invalid JSON response',
+                $response->status()
             );
-        }
-
-        if ($statusCode >= 400) {
-            $message = $body['message'] ?? $body['error'] ?? 'Unknown error occurred';
-            throw new NowPaymentsException($message, $statusCode);
         }
 
         return is_array($body) ? $body : [];
     }
 
     /**
-     * Handle Guzzle exception.
+     * Handle failed API response.
      *
-     * @param GuzzleException $e
+     * @param Response $response
+     * @throws NowPaymentsException
+     */
+    protected function handleFailedResponse(Response $response): void
+    {
+        $body = $response->json();
+        $message = $body['message'] ?? $body['error'] ?? 'Unknown error occurred';
+        throw new NowPaymentsException($message, $response->status());
+    }
+
+    /**
+     * Handle connection exception.
+     *
+     * @param ConnectionException $e
      * @return NowPaymentsException
      */
-    protected function handleGuzzleException(GuzzleException $e): NowPaymentsException
+    protected function handleConnectionException(ConnectionException $e): NowPaymentsException
     {
-        if ($e->hasResponse()) {
-            $response = $e->getResponse();
-            $contents = $response->getBody()->getContents();
-            $body = json_decode($contents, true);
-
-            if (is_array($body)) {
-                $message = $body['message'] ?? $body['error'] ?? $e->getMessage();
-            } else {
-                $message = $e->getMessage();
-            }
-
-            return new NowPaymentsException($message, $response->getStatusCode());
-        }
-
         return new NowPaymentsException($e->getMessage(), $e->getCode());
     }
 
@@ -270,14 +251,23 @@ class NowPaymentsClient
         }
 
         try {
-            $response = $this->client->post('/v1/auth', [
-                'json' => [
+            $response = Http::baseUrl($this->baseUrl)
+                ->withUserAgent('SerenityTechnologies/NowPaymentsClient')
+                ->withHeaders([
+                    'x-api-key' => $this->apiKey,
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ])
+                ->post('/v1/auth', [
                     'email' => $this->dashboardEmail,
                     'password' => $this->dashboardPassword,
-                ],
-            ]);
+                ]);
 
-            $body = json_decode($response->getBody()->getContents(), true);
+            if ($response->failed()) {
+                $this->handleFailedResponse($response);
+            }
+
+            $body = $response->json();
 
             if (!isset($body['token'])) {
                 throw NowPaymentsException::authenticationFailed('Token not returned');
@@ -287,8 +277,10 @@ class NowPaymentsClient
             $this->jwtTokenAcquiredAt = time();
 
             return $this->jwtToken;
-        } catch (GuzzleException $e) {
-            throw $this->handleGuzzleException($e);
+        } catch (NowPaymentsException $e) {
+            throw $e;
+        } catch (\Exception $e) {
+            throw new NowPaymentsException($e->getMessage(), $e->getCode());
         }
     }
 
