@@ -13,8 +13,7 @@ class ConversionListResponse extends BaseResponseDto
      */
     public function __construct(
         public readonly array $conversions,
-        public readonly ?int $total,
-        public readonly ?string $next,
+        public readonly ?int $count = null,
     ) {
     }
 
@@ -22,23 +21,25 @@ class ConversionListResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
+     *     result?: array[],
+     *     count?: int|null,
      *     data?: array[],
      *     total?: int|null,
-     *     next?: string|null,
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
+        // Handle both {result: [...], count: N} and {data: [...], total: N} formats
+        $conversionsData = $data['result'] ?? $data['data'] ?? [];
         $conversions = array_map(
             fn(array $item) => ConversionResponse::fromArray($item),
-            $data['data'] ?? []
+            is_array($conversionsData) ? $conversionsData : []
         );
 
         return new self(
             conversions: $conversions,
-            total: $data['total'] ?? null,
-            next: $data['next'] ?? null,
+            count: $data['count'] ?? $data['total'] ?? null,
         );
     }
 }

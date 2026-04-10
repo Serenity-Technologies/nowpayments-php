@@ -9,15 +9,14 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 class ConversionResponse extends BaseResponseDto
 {
     public function __construct(
-        public readonly ?string $conversion_id,
+        public readonly ?string $id,
         public readonly ?string $status,
-        public readonly ?float $amount_from,
-        public readonly ?string $currency_from,
-        public readonly ?float $amount_to,
-        public readonly ?string $currency_to,
+        public readonly ?float $from_amount,
+        public readonly ?string $from_currency,
+        public readonly ?float $to_amount,
+        public readonly ?string $to_currency,
         public readonly ?string $created_at,
         public readonly ?string $updated_at,
-        public readonly ?array $details,
     ) {
     }
 
@@ -25,30 +24,28 @@ class ConversionResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
-     *     conversion_id?: string|null,
+     *     id?: string|null,
      *     status?: string|null,
-     *     amount_from?: float|null,
-     *     currency_from?: string|null,
-     *     amount_to?: float|null,
-     *     currency_to?: string|null,
+     *     from_amount?: float|null,
+     *     from_currency?: string|null,
+     *     to_amount?: float|null,
+     *     to_currency?: string|null,
      *     created_at?: string|null,
      *     updated_at?: string|null,
-     *     details?: array|null,
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
         return new self(
-            conversion_id: $data['conversion_id'] ?? null,
+            id: $data['id'] ?? null,
             status: $data['status'] ?? null,
-            amount_from: isset($data['amount_from']) ? (float) $data['amount_from'] : null,
-            currency_from: $data['currency_from'] ?? null,
-            amount_to: isset($data['amount_to']) ? (float) $data['amount_to'] : null,
-            currency_to: $data['currency_to'] ?? null,
+            from_amount: isset($data['from_amount']) ? (float) $data['from_amount'] : null,
+            from_currency: $data['from_currency'] ?? null,
+            to_amount: isset($data['to_amount']) ? (float) $data['to_amount'] : null,
+            to_currency: $data['to_currency'] ?? null,
             created_at: $data['created_at'] ?? null,
             updated_at: $data['updated_at'] ?? null,
-            details: $data['details'] ?? null,
         );
     }
 }

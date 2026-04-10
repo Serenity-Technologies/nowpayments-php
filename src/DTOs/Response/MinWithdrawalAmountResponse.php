@@ -9,8 +9,8 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
 class MinWithdrawalAmountResponse extends BaseResponseDto
 {
     public function __construct(
-        public readonly string $currency,
-        public readonly float $min_amount,
+        public readonly bool $success,
+        public readonly float $result,
     ) {
     }
 
@@ -18,16 +18,16 @@ class MinWithdrawalAmountResponse extends BaseResponseDto
      * Create from array data.
      *
      * @param array{
-     *     currency: string,
-     *     min_amount: float,
+     *     success?: bool,
+     *     result?: float,
      * } $data
      * @return static
      */
     public static function fromArray(array $data): static
     {
         return new self(
-            currency: $data['currency'],
-            min_amount: (float) $data['min_amount'],
+            success: $data['success'] ?? true,
+            result: isset($data['result']) ? (float) $data['result'] : 0.0,
         );
     }
 }
