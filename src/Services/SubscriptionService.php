@@ -106,9 +106,12 @@ class SubscriptionService
     {
         $request->validate();
         $response = $this->client->post('/v1/subscriptions', $request->toArray(), requiresAuth: true);
-        $data = SubscriptionResponse::unwrapResult($response);
+        
+        // API returns { "result": [...] } - unwrap and take first element
+        $result = SubscriptionResponse::unwrapResult($response);
+        $subscriptionData = is_array($result) && isset($result[0]) ? $result[0] : $result;
 
-        return SubscriptionResponse::fromArray($data);
+        return SubscriptionResponse::fromArray($subscriptionData);
     }
 
     /**
@@ -139,9 +142,12 @@ class SubscriptionService
     public function getSubscription(string $subId): SubscriptionResponse
     {
         $response = $this->client->get('/v1/subscriptions/' . $subId, query: [], requiresAuth: false);
-        $data = SubscriptionResponse::unwrapResult($response);
+        $result = SubscriptionResponse::unwrapResult($response);
+        
+        // Handle both array and single object responses
+        $subscriptionData = is_array($result) && isset($result[0]) ? $result[0] : $result;
 
-        return SubscriptionResponse::fromArray($data);
+        return SubscriptionResponse::fromArray($subscriptionData);
     }
 
     /**

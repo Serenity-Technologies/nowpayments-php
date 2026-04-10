@@ -8,17 +8,18 @@ namespace SerenityTechnologies\NowPayments\DTOs\Response;
  */
 class SubscriptionResponse extends BaseResponseDto
 {
+    /**
+     * @param SubscriberInfo|null $subscriber Subscriber information
+     */
     public function __construct(
-        public readonly ?string         $id,
-        public readonly string|int|null $planId,
-        public readonly ?string         $status,
-        public readonly ?string         $customerId,
-        public readonly ?string         $customerEmail,
-        public readonly ?float          $amount,
-        public readonly ?string         $currency,
-        public readonly ?string         $createdAt,
-        public readonly ?string         $updatedAt,
-        public readonly ?string         $nextBillingDate,
+        public readonly ?string $id,
+        public readonly string|int|null $subscriptionPlanId,
+        public readonly ?bool $isActive,
+        public readonly ?string $status,
+        public readonly ?string $expireDate,
+        public readonly ?SubscriberInfo $subscriber,
+        public readonly ?string $createdAt,
+        public readonly ?string $updatedAt,
     ) {
     }
 
@@ -27,15 +28,13 @@ class SubscriptionResponse extends BaseResponseDto
      *
      * @param array{
      *     id?: string|null,
-     *     plan_id?: string|int|null,
+     *     subscription_plan_id?: string|int|null,
+     *     is_active?: bool|null,
      *     status?: string|null,
-     *     customer_id?: string|null,
-     *     customer_email?: string|null,
-     *     amount?: float|null,
-     *     currency?: string|null,
+     *     expire_date?: string|null,
+     *     subscriber?: array{email?: string|null}|null,
      *     created_at?: string|null,
      *     updated_at?: string|null,
-     *     next_billing_date?: string|null,
      * } $data
      * @return static
      */
@@ -43,15 +42,13 @@ class SubscriptionResponse extends BaseResponseDto
     {
         return new self(
             id: $data['id'] ?? null,
-            planId: $data['plan_id'] ?? null,
+            subscriptionPlanId: $data['subscription_plan_id'] ?? null,
+            isActive: $data['is_active'] ?? null,
             status: $data['status'] ?? null,
-            customerId: $data['customer_id'] ?? null,
-            customerEmail: $data['customer_email'] ?? null,
-            amount: isset($data['amount']) ? (float) $data['amount'] : null,
-            currency: $data['currency'] ?? null,
+            expireDate: $data['expire_date'] ?? null,
+            subscriber: isset($data['subscriber']) ? SubscriberInfo::fromArray($data['subscriber']) : null,
             createdAt: $data['created_at'] ?? null,
             updatedAt: $data['updated_at'] ?? null,
-            nextBillingDate: $data['next_billing_date'] ?? null,
         );
     }
 }
